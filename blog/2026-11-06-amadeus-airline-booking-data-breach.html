@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Amadeus Booking Data Breach: What Airlines Should Check Next | Black Belt Hacker</title>
+  <meta name="description" content="Amadeus-related unauthorized booking access hit multiple airlines across a multi-year window. Defenders should focus on supplier identity and passenger phishing."/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>Amadeus Booking Data Breach: What Airlines Should Check Next</h1>
+    <div class="meta">2026-11-06 · updated 2026-11-11 with Thai Airways&rsquo; 9 November notice · incident, third-party, airlines, privacy, detection</div>
+    <figure class="lead"><img src="assets/amadeus-airline-booking-data-breach-header.jpg" alt="A blank departure board in a dark terminal with orange threads running out to many gates." width="1600" height="905"/></figure>
+    
+
+    <p>Japan Airlines said Amadeus notified it on <a href="https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/">23 October 2026</a> that unauthorized access to Amadeus systems occurred between <a href="https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/">10 August 2023 and 23 September 2026</a>. About <a href="https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/">92,000</a> JAL Group customers were in scope. Most records involved booking codes, names, dates, routes, and travel class. About <a href="https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/">2,000</a> also included contact details, passport numbers, nationality, and frequent flyer data. JAL reported no evidence that credit cards or passwords were taken, and said operations were unaffected.</p>
+<figure class="diagram">
+  <img src="assets/amadeus-airline-booking-data-breach.png" alt="Shared reservation platform fan-out: one Amadeus system account reached booking data for many airlines; counts use different units." width="720" height="300"/>
+  <figcaption>One supplier account, many notices. The counts use different units, so do not add them up. · files: <a href="assets/amadeus-airline-booking-data-breach.svg">svg</a> / <a href="assets/amadeus-airline-booking-data-breach.png">png</a></figcaption>
+</figure>
+
+<p>That alone would be a serious supplier incident. It is not alone.</p>
+<p>Public notices and reputable reporting tied the same Amadeus problem to other carriers. <a href="https://www.businesstraveller.com/news/amadeus-data-breach-airlines-passenger-information-exposed/">Business Traveller</a> summarizes overlapping disclosures for ANA, Cathay Pacific, and others, with Cathay citing roughly <a href="https://www.businesstraveller.com/news/amadeus-data-breach-airlines-passenger-information-exposed/">53,000</a> affected bookings. On 9 November, <a href="https://www.thaiairways.com/de-de/content/news/amadeus-reports-unauthorized-access-to-thai-passenger-data/">Thai Airways</a> disclosed about 60,529 passenger records potentially accessed through the supplier, with the same 10 August 2023 to 23 September 2026 window. Korean Air and Asiana reported booking references exposed after Amadeus notified them on 20 October.</p>
+<p>Amadeus posted a <a href="https://amadeus.com/amadeus-statement-oct">statement on 1 October</a> saying it had found a vulnerability affecting a travel booking display environment that made certain booking display data accessible, and that it had no evidence payment or financial data was accessed. <a href="https://aerocorner.com/news/cathay-pacific-amadeus-breach-53000-bookings/">Cathay Pacific&rsquo;s notice</a> is more specific about the how: an unauthorized party used login credentials assigned to an Amadeus system account. ANA relays that Amadeus invalidated those credentials and found no sign of ransomware or of data being altered. Nobody has publicly said who used the credentials or how they were obtained. Stick to what each source claims; do not invent a single root cause narrative beyond that.</p>
+<h2>The defender angle is not &ldquo;airlines are special&rdquo;</h2>
+<p>If you are not an airline, you still own the pattern:</p>
+<ol>
+<li>A concentrated SaaS or platform vendor holds identity rich records for many customers.</li>
+<li>Access persists for years before notifications fan out.</li>
+<li>The leaked fields are perfect for convincing fraud even when payment cards are absent.</li>
+</ol>
+<p>Name + itinerary + PNR is enough to build a fake &ldquo;rebook your flight / pay the fare difference&rdquo; lure that beats most generic phishing templates. Passport fields raise the stakes further for a subset of victims.</p>
+<h2>What security teams should do even if Amadeus is not your vendor</h2>
+<p><strong>Vendor inventory reality check</strong></p>
+<ul>
+<li>Which suppliers hold customer travel, identity documents, or booking references?</li>
+<li>Which of those have shared multi tenant admin or support interfaces?</li>
+<li>How fast can the vendor name affected record counts and fields?</li>
+</ul>
+<p><strong>Detection around fraud, not only around the breach notice</strong></p>
+<ul>
+<li>Spike detection on password reset and support ticket themes mentioning flights, PNR, or passport updates</li>
+<li>Brand monitoring for lookalike airline or travel domains registered near disclosure dates</li>
+<li>Call center scripts that authenticate customers without oversharing booking details the caller already &ldquo;knows&rdquo;</li>
+</ul>
+<p><strong>Passenger and employee guidance that is specific</strong></p>
+<ul>
+<li>Expect phishing that cites real itinerary fragments</li>
+<li>Do not pay fare difference requests from unexpected channels</li>
+<li>Use official apps/sites bookmarked earlier, not links in messages</li>
+<li>Treat passport and frequent flyer number requests as high risk</li>
+</ul>
+<p>Airlines that already contacted customers, including <a href="https://www.businesstraveller.com/news/amadeus-data-breach-airlines-passenger-information-exposed/">JAL&rsquo;s warning</a> about deceptive emails, calls and sites, are doing the necessary messy part. Corporate security teams supporting travelers should amplify that without adding unverified technical claims.</p>
+<h2>Controls for platform customers (airlines and large OTAs)</h2>
+<p>If you consume a shared passenger service system:</p>
+<ul>
+<li>Demand written scope: time window, fields, authentication mechanism abused, and containment actions</li>
+<li>Require credential resets for vendor side accounts that can view bookings, plus monitoring rules for anomalous booking lookups</li>
+<li>Reduce field exposure in day to day tools. Support staff do not always need full passport numbers on screen.</li>
+<li>Log and review high volume PNR lookups from support and partner identities</li>
+<li>Contract for notification timelines measured in days, not weeks after containment</li>
+</ul>
+<p><a href="https://www.thaiairways.com/de-de/content/news/amadeus-reports-unauthorized-access-to-thai-passenger-data/">Thai Airways&rsquo; notice</a> says Amadeus cancelled the account used for the access, changed the affected passwords and strengthened monitoring. That is necessary. Customers still need evidence of continuous detection for bulk enumeration style access, not only password resets after the fact.</p>
+<h2>What not to overclaim</h2>
+<p>Do not total every airline&rsquo;s numbers into one global victim count. Different disclosures mix customers and bookings, and people fly multiple carriers. Do not claim payment card theft when the published notices say otherwise. Do not invent an APT name where reporting has not assigned one.</p>
+<h2>Corporate travel security add on</h2>
+<p>Security teams that manage traveling executives should assume itinerary fragments may already be in hostile hands for some carriers. Practical moves:</p>
+<ul>
+<li>Prefer official carrier apps for changes</li>
+<li>Watch for invoice and rebooking lures that cite real flight times</li>
+<li>Use travel desk callbacks instead of email reply chains for expensive changes</li>
+<li>Flag expense systems for duplicate fare difference payments after disclosure weeks</li>
+</ul>
+<p>This is fraud operations work as much as cyber. Bring finance and travel desk into the same briefing.</p>
+<h2>Checklist</h2>
+<ul>
+<li>Map suppliers that store itinerary and identity document fields</li>
+<li>Refresh traveler phishing guidance with PNR and passport themes</li>
+<li>Tune fraud and help desk detection for itinerary aware social engineering</li>
+<li>Ask critical travel vendors for access anomaly monitoring status</li>
+<li>Review how much sensitive traveler data appears in internal support UIs</li>
+<li>Brief travel desk and finance on fare difference scam patterns</li>
+</ul>
+<p>A multi year window on a shared reservation platform is a supplier risk story and a fraud enablement story at the same time. Patch theater does not apply. Identity rich data did.</p>
+    <div class="sources"><h2>Sources</h2><ul><li><a href="https://amadeus.com/amadeus-statement-oct">Amadeus: statement, 1 October 2026</a></li>
+<li><a href="https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/">BleepingComputer: Japan Airlines suffers third party data breach exposing passenger info</a></li>
+<li><a href="https://www.businesstraveller.com/news/amadeus-data-breach-airlines-passenger-information-exposed/">Business Traveller: major airlines report Amadeus breach</a></li>
+<li><a href="https://aerocorner.com/news/cathay-pacific-amadeus-breach-53000-bookings/">AeroCorner: Cathay Pacific says Amadeus breach hit about 53,000 bookings</a></li>
+<li><a href="https://www.thaiairways.com/de-de/content/news/amadeus-reports-unauthorized-access-to-thai-passenger-data/">Thai Airways: Amadeus reports unauthorized access to THAI passenger data (9 Nov 2026)</a></li>
+<li><a href="https://www.escudodigital.com/en/cybersecurity/amadeus-cyberattack-puts-passenger-data-at-risk-at-four-airlines.html">Escudo Digital: Amadeus incident at Korean Air, Asiana, JAL and ANA</a></li></ul></div>
+    <div class="tags">Tags: incident, third-party, airlines, privacy, detection</div>
+  </article>
+</body>
+</html>

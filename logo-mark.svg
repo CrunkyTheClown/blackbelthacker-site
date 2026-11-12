@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Black Belt Hacker mark">
+  <title>Black Belt Hacker</title>
+  <rect width="512" height="512" rx="96" fill="#07080f"/>
+  <polygon points="256,44 436,148 436,364 256,468 76,364 76,148" fill="none" stroke="#3df0ff" stroke-width="14" stroke-linejoin="round"/>
+  <polyline points="256,44 256,150" fill="none" stroke="#3df0ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="160" r="11" fill="#07080f" stroke="#3df0ff" stroke-width="6"/>
+  <polyline points="76,172 156,172 186,202" fill="none" stroke="#3df0ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="192" cy="208" r="11" fill="#07080f" stroke="#3df0ff" stroke-width="6"/>
+  <polyline points="436,172 356,172 326,202" fill="none" stroke="#3df0ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="320" cy="208" r="11" fill="#07080f" stroke="#3df0ff" stroke-width="6"/>
+  <polyline points="76,330 124,330 146,352" fill="none" stroke="#3df0ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="152" cy="358" r="11" fill="#07080f" stroke="#3df0ff" stroke-width="6"/>
+  <polyline points="436,330 388,330 366,352" fill="none" stroke="#3df0ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="360" cy="358" r="11" fill="#07080f" stroke="#3df0ff" stroke-width="6"/>
+  <rect x="40" y="236" width="432" height="48" rx="6" fill="#12141c" stroke="#07080f" stroke-width="18"/>
+  <rect x="40" y="236" width="432" height="48" rx="6" fill="#12141c" stroke="#ff2bd6" stroke-width="6"/>
+  <line x1="54" y1="247" x2="458" y2="247" stroke="#2c3040" stroke-width="3" stroke-dasharray="10 8"/>
+  <line x1="54" y1="273" x2="458" y2="273" stroke="#2c3040" stroke-width="3" stroke-dasharray="10 8"/>
+  <polygon points="216,300 250,300 206,400 172,400" fill="#12141c" stroke="#07080f" stroke-width="18" stroke-linejoin="round"/>
+  <polygon points="262,300 296,300 340,400 306,400" fill="#12141c" stroke="#07080f" stroke-width="18" stroke-linejoin="round"/>
+  <polygon points="216,300 250,300 206,400 172,400" fill="#12141c" stroke="#ff2bd6" stroke-width="6" stroke-linejoin="round"/>
+  <polygon points="262,300 296,300 340,400 306,400" fill="#12141c" stroke="#ff2bd6" stroke-width="6" stroke-linejoin="round"/>
+  <polygon points="290.6,365 324.6,365 340,400 306,400" fill="#ff2a3d" stroke="#ff2bd6" stroke-width="6" stroke-linejoin="round"/>
+  <rect x="204" y="214" width="104" height="92" rx="14" fill="#07080f" stroke="#07080f" stroke-width="16"/>
+  <rect x="204" y="214" width="104" height="92" rx="14" fill="#07080f" stroke="#ff2bd6" stroke-width="6"/>
+  <polyline points="232,238 258,260 232,282" fill="none" stroke="#3df0ff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <line class="cursor" x1="268" y1="282" x2="292" y2="282" stroke="#3df0ff" stroke-width="11" stroke-linecap="round"/>
+</svg>

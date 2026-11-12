@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="Shared reservation platform fan-out: one Amadeus system account reached booking data for many airlines; counts use different units.">
+  <rect width="720" height="300" fill="#ffffff"/>
+  <defs><marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a5a5a"/></marker></defs>
+  <text x="360.0" y="34" text-anchor="middle" fill="#1a1a1a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-weight="600">One supplier account, many airline notices (Aug 2023 to Sep 2026)</text>
+  <rect x="250" y="60" width="220" height="70" rx="8" fill="#8a2e0b"/>
+  <text x="360.0" y="91.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="14" font-weight="600">Amadeus PSS</text>
+  <text x="360.0" y="109.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">system account credentials</text>
+  <rect x="560" y="60" width="145" height="70" rx="8" fill="#5a1f0c"/>
+  <text x="632.5" y="91.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="14" font-weight="600">Phishing</text>
+  <text x="632.5" y="109.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">itinerary aware lures</text>
+  <rect x="30" y="175" width="150" height="64" rx="8" fill="#0b3d2e"/>
+  <text x="105.0" y="203.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">JAL / JTA</text>
+  <text x="105.0" y="221.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">~92k customers</text>
+  <line x1="360" y1="130" x2="105" y2="173" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="195" y="175" width="150" height="64" rx="8" fill="#0b3d2e"/>
+  <text x="270.0" y="203.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Cathay</text>
+  <text x="270.0" y="221.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">~53k bookings</text>
+  <line x1="360" y1="130" x2="270" y2="173" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="360" y="175" width="150" height="64" rx="8" fill="#0b3d2e"/>
+  <text x="435.0" y="203.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Thai</text>
+  <text x="435.0" y="221.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">60,529 records</text>
+  <line x1="360" y1="130" x2="435" y2="173" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="525" y="175" width="150" height="64" rx="8" fill="#0b3d2e"/>
+  <text x="600.0" y="203.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">ANA, Korean,</text>
+  <text x="600.0" y="221.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">Asiana, others</text>
+  <line x1="360" y1="130" x2="600" y2="173" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="470" y1="95" x2="558" y2="95" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="360.0" y="275" text-anchor="middle" fill="#5a5a5a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">Counts are customers, bookings and records. Do not add them up.</text>
+</svg>

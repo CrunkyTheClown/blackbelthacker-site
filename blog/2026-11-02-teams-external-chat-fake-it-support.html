@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Fake IT Support Scams Are Abusing Microsoft Teams Chat | Black Belt Hacker</title>
+  <meta name="description" content="Arctic Wolf tracked 400+ incidents abusing Teams external chat as fake IT support. Default federation plus email bombing is the access path."/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>Fake IT Support Scams Are Abusing Microsoft Teams Chat</h1>
+    <div class="meta">2026-11-02 · trend, microsoft-teams, social-engineering, ransomware, detection</div>
+    <figure class="lead"><img src="assets/teams-external-chat-fake-it-support-header.jpg" alt="A laptop chat window with one orange message and a ghostly hand reaching for the keyboard beside a pile of envelopes." width="1600" height="905"/></figure>
+    
+
+    <p><a href="https://arcticwolf.com/resources/blog/threat-actors-abuse-microsoft-teams-external-chat-for-initial-access/">Arctic Wolf Labs</a> published an analysis on 26 October 2026 of more than <a href="https://www.helpnetsecurity.com/2026/10/27/microsoft-teams-social-engineering-fake-it-help-desk/">400 incidents</a> where attackers abused Microsoft Teams external chat for initial access. <a href="https://www.helpnetsecurity.com/2026/10/27/microsoft-teams-social-engineering-fake-it-help-desk/">Help Net Security</a> and <a href="https://www.infosecurity-magazine.com/news/exploit-teams-chat-breach/">Infosecurity Magazine</a> covered the research in late October 2026.</p>
+<figure class="diagram">
+  <img src="assets/teams-external-chat-fake-it-support.png" alt="Fake IT support path: email bomb, external Teams chat, remote assist, then hands on keyboard." width="720" height="280"/>
+  <figcaption>Every arrow here is a normal product feature. The ChatCreated event is your earliest chance to see it. · files: <a href="assets/teams-external-chat-fake-it-support.svg">svg</a> / <a href="assets/teams-external-chat-fake-it-support.png">png</a></figcaption>
+</figure>
+
+<p>There is no CVE to patch here. Teams external access (federation) is a product feature, often enabled broadly by default. Attackers create or acquire Microsoft 365 tenants, message employees as &ldquo;IT support,&rdquo; and talk them into remote assistance. Some cases escalate to credential theft, lateral movement, and ransomware related activity.</p>
+<p>If your mental model of initial access is still &ldquo;email link or exploited appliance,&rdquo; update it. Chat is part of the edge.</p>
+<h2>The playbook defenders keep seeing</h2>
+<p>Public reporting describes a highly consistent pattern:</p>
+<ol>
+<li>Optional email bombing: flood the mailbox with newsletter and subscription noise.</li>
+<li>Moments later, a Teams message from an external account that looks like IT support.</li>
+<li>Display names such as &ldquo;IT Support (Internal)&rdquo; or &ldquo;HelpDesk Manager,&rdquo; or a friendly first name, to muddy the external label (<a href="https://darkreading.com/cloud-security/email-bombing-external-teams-chats-repeatable-access-path">Dark Reading</a>).</li>
+<li>Push to a voice call and remote access, especially Windows Quick Assist, then commercial RMM tools such as AnyDesk or ScreenConnect for persistence.</li>
+<li>Payload execution in <a href="https://www.infosecurity-magazine.com/news/exploit-teams-chat-breach/">under 15 minutes</a> in some observed cases.</li>
+</ol>
+<p><a href="https://www.helpnetsecurity.com/2026/10/27/microsoft-teams-social-engineering-fake-it-help-desk/">Help Net Security</a> notes that a large share of cases used free onmicrosoft.com tenants with IT themed names, with a shift toward paid domains including many <code>.top</code> identities. Attackers avoid dropping scanned links in chat when they can download tooling themselves during the remote session.</p>
+<p>This technique is not brand new. <a href="https://www.microsoft.com/en-us/security/blog/?p=134322">Microsoft described</a> Storm-1811 abusing Quick Assist in help desk impersonation in May 2024, and <a href="https://www.sophos.com/en-us/blog/sophos-mdr-tracks-two-ransomware-campaigns-using-email-bombing-microsoft-teams-vishing">Sophos MDR</a> tracked email bombing plus Teams vishing campaigns tied to the Black Basta ecosystem. The October research matters because of documented scale and operational consistency across hundreds of incidents.</p>
+<h2>Detection that does not wait for malware</h2>
+<p>You will miss this if you only alert on &ldquo;known bad hash.&rdquo;</p>
+<p>Arctic Wolf names the best detection point: the attackers open a one to one chat, which Microsoft 365 audit logs record as a <code>ChatCreated</code> event, and its alerts usually fire there <a href="https://darkreading.com/cloud-security/email-bombing-external-teams-chats-repeatable-access-path">before the user does anything</a>.</p>
+<p><strong>Identity and Teams signals</strong></p>
+<ul>
+<li>External Teams chats to employees from newly created tenants</li>
+<li>External senders whose display names contain IT, Helpdesk, Support, or Internal</li>
+<li>Bursts of external chat attempts across multiple users inside a few minutes</li>
+<li>Teams calls from external identities immediately after email flood anomalies</li>
+</ul>
+<p><strong>Endpoint signals</strong></p>
+<ul>
+<li>Quick Assist launched in correlation with an external Teams session</li>
+<li>New installs of AnyDesk, ScreenConnect, or similar RMM outside IT change control</li>
+<li>User executed PowerShell one liners during or right after a Teams support call</li>
+<li>Simultaneous credential theft alerts and first external Teams message, which Arctic Wolf noted in some cases</li>
+</ul>
+<p><strong>Mail signals</strong></p>
+<ul>
+<li>Sudden subscription confirmation storms to a single user</li>
+<li>Pair that storm with a Teams external chat within minutes</li>
+</ul>
+<p>Wire these as a single incident type: &ldquo;suspected fake support.&rdquo; Do not make the help desk open five unrelated tickets.</p>
+<p>Two Defender XDR advanced hunting queries to start from. Treat them as a starting point: confirm the <code>RawEventData</code> fields in your own tenant before you alert on them.</p>
+<pre><code>// External one to one Teams chats created in the last 7 days
+CloudAppEvents
+| where Timestamp &gt; ago(7d)
+| where Application == "Microsoft Teams" and ActionType == "ChatCreated"
+| extend HasExternal = tobool(RawEventData.ParticipantInfo.HasForeignTenantUsers)
+| where HasExternal
+| project Timestamp, AccountObjectId, AccountDisplayName, RawEventData</code></pre>
+<pre><code>// Quick Assist and common RMM launches in the same window
+DeviceProcessEvents
+| where Timestamp &gt; ago(7d)
+| where FileName in~ ("quickassist.exe", "AnyDesk.exe", "ScreenConnect.ClientService.exe")
+| project Timestamp, DeviceName, AccountName, FileName, InitiatingProcessFileName</code></pre>
+<p>Join the two on the user and a 30 minute window. A new external chat followed by a remote support launch on that user&rsquo;s device is the pattern.</p>
+<h2>Mitigation that actually reduces the class of attack</h2>
+<p>Technical controls first:</p>
+<ul>
+<li>In the Teams admin center, go to Users, then External access, and switch from allowing all external domains to <a href="https://learn.microsoft.com/en-us/microsoftteams/manage-external-access">allowing only specific external domains</a> your business truly needs</li>
+<li>Confirm trial only tenants are blocked: <code>Set-CsTenantFederationConfiguration -ExternalAccessWithTrialTenants "Blocked"</code>. Blocked has been the <a href="https://learn.microsoft.com/en-us/microsoftteams/manage-external-access">default since mid 2024</a>, so the real check is that nobody switched it back. It does nothing against attacker tenants that hold even one paid seat, which is why the allow list matters more.</li>
+<li>Restrict Quick Assist and commercial RMM to authorized support staff via application control or Windows policy</li>
+<li>Require privileged remote support to originate from known IT identities on known tools</li>
+</ul>
+<p>People and process next:</p>
+<ul>
+<li>Tell employees that real IT does not cold DM them from external tenants</li>
+<li>Create a verification channel: hang up, call the published service desk number or open an internal ticket</li>
+<li>Train the service desk to ask whether the user is currently on an external Teams call before walking through remediation</li>
+<li>Ban the habit of reading Quick Assist codes to strangers, even polite ones</li>
+</ul>
+<p>Most organizations do not need the entire internet able to chat their workforce. Treat open federation like open SMB. Useful in tiny cases. Dangerous as a default.</p>
+<h2>What to tell executives</h2>
+<p>We face a high volume social engineering pattern that abuses default Teams collaboration features, documented across <a href="https://www.infosecurity-magazine.com/news/exploit-teams-chat-breach/">400+</a> incidents. It is not a Teams vulnerability patch problem. It is an external access policy problem plus remote support hygiene. Closing federation to an allow list and constraining Quick Assist cuts off the cheapest path.</p>
+<h2>A one week hardening sprint</h2>
+<ol class="sprint">
+<li>Day 1: export current external access policy and list of allowed domains.</li>
+<li>Day 2: draft the allow list with business owners. Remove &ldquo;everyone&rdquo; as a setting.</li>
+<li>Day 3: restrict Quick Assist and unapproved RMM via policy.</li>
+<li>Day 4: ship employee guidance and service desk verification steps.</li>
+<li>Day 5: enable detections for external IT themed chats correlated with remote support binaries.</li>
+<li>Day 6 to 7: tabletop one email bomb plus Teams helpdesk lure end to end.</li>
+</ol>
+<p>That sprint is cheaper than one ransomware weekend.</p>
+<h2>Checklist</h2>
+<ul>
+<li>Audit current Teams external access mode</li>
+<li>Convert to domain allow lists where possible</li>
+<li>Inventory who can run Quick Assist and RMM tools</li>
+<li>Add detections for external IT themed chats paired with remote support binaries</li>
+<li>Publish a one page employee verification procedure</li>
+<li>Tabletop a fake helpdesk call that starts in Teams</li>
+</ul>
+<p>Attackers will keep using the collaboration tools you celebrate in all hands meetings. Configure those tools like security products, because that is how adversaries already treat them.</p>
+    <div class="sources"><h2>Sources</h2><ul><li><a href="https://arcticwolf.com/resources/blog/threat-actors-abuse-microsoft-teams-external-chat-for-initial-access/">Arctic Wolf Labs: threat actors abuse Microsoft Teams external chat for initial access</a></li>
+<li><a href="https://www.helpnetsecurity.com/2026/10/27/microsoft-teams-social-engineering-fake-it-help-desk/">Help Net Security: hackers bury inboxes in spam then show up on Teams posing as IT support</a></li>
+<li><a href="https://www.infosecurity-magazine.com/news/exploit-teams-chat-breach/">Infosecurity Magazine: attackers exploit Teams external chat to breach organizations in under 15 minutes</a></li>
+<li><a href="https://darkreading.com/cloud-security/email-bombing-external-teams-chats-repeatable-access-path">Dark Reading: external Teams chats anchor 15 minute malware delivery</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoftteams/manage-external-access">Microsoft Learn: manage external meetings and chat</a></li>
+<li><a href="https://www.microsoft.com/en-us/security/blog/?p=134322">Microsoft Threat Intelligence: threat actors misusing Quick Assist in social engineering attacks (May 2024)</a></li>
+<li><a href="https://www.sophos.com/en-us/blog/sophos-mdr-tracks-two-ransomware-campaigns-using-email-bombing-microsoft-teams-vishing">Sophos MDR: two ransomware campaigns using email bombing and Teams vishing</a></li></ul></div>
+    <div class="tags">Tags: trend, microsoft-teams, social-engineering, ransomware, detection</div>
+  </article>
+</body>
+</html>

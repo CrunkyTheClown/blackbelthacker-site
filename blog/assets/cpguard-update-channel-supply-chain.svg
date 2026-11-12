@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" role="img" aria-label="cPGuard incident path: trial account to billing server, stolen update key, poisoned update channel, root script on customer hosts, secrets out.">
+  <rect width="760" height="320" fill="#ffffff"/>
+  <defs><marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a5a5a"/></marker></defs>
+  <text x="380.0" y="34" text-anchor="middle" fill="#1a1a1a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-weight="600">Trusted update, untrusted outcome (cPGuard, 2 Nov 2026)</text>
+  <rect x="15" y="80" width="130" height="80" rx="8" fill="#5a1f0c"/>
+  <text x="80.0" y="116.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Trial account</text>
+  <text x="80.0" y="134.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">billing portal</text>
+  <rect x="163" y="80" width="130" height="80" rx="8" fill="#8a2e0b"/>
+  <text x="228.0" y="116.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Billing server</text>
+  <text x="228.0" y="134.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">command execution</text>
+  <line x1="145" y1="120" x2="161" y2="120" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="311" y="80" width="130" height="80" rx="8" fill="#8a2e0b"/>
+  <text x="376.0" y="116.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Update key</text>
+  <text x="376.0" y="134.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">stolen</text>
+  <line x1="293" y1="120" x2="309" y2="120" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="459" y="80" width="130" height="80" rx="8" fill="#5a1f0c"/>
+  <text x="524.0" y="116.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Update channel</text>
+  <text x="524.0" y="134.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">5.88.12 to 5.88.19</text>
+  <line x1="441" y1="120" x2="457" y2="120" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="607" y="80" width="130" height="80" rx="8" fill="#0b3d2e"/>
+  <text x="672.0" y="116.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">cPGuard host</text>
+  <text x="672.0" y="134.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">script runs as root</text>
+  <line x1="589" y1="120" x2="605" y2="120" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="455" y="200" width="290" height="64" rx="8" fill="#245c46"/>
+  <text x="600.0" y="228.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Secrets out, backdoor left</text>
+  <text x="600.0" y="246.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">rotate everything the host held</text>
+  <line x1="667" y1="160" x2="620" y2="198" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="380.0" y="300" text-anchor="middle" fill="#5a5a5a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">Cleanup builds (5.88.25+) remove artifacts. Rotation closes the incident.</text>
+</svg>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ivanti Connect Secure Is on CISA KEV Again: Hunt, Then Patch | Black Belt Hacker</title>
+  <meta name="description" content="Two more Ivanti Connect Secure flaws hit KEV on 30 Oct 2026, completing an unauthenticated chain to root. Treat edge VPN patching as compromise triage."/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>Ivanti Connect Secure Is on CISA KEV Again: Hunt, Then Patch</h1>
+    <div class="meta">2026-11-10 · cve, ivanti, kev, vpn, edge, incident-response</div>
+    <figure class="lead"><img src="assets/ivanti-connect-secure-kev-chain-header.jpg" alt="A VPN gateway with a vault door ajar and a glowing orange chain inside." width="1600" height="905"/></figure>
+    
+
+    <p><a href="https://www.cisa.gov/news-events/alerts/2026/10/30/cisa-adds-two-known-exploited-vulnerabilities-catalog">CISA&rsquo;s 30 October 2026 alert</a> added two Ivanti Connect Secure vulnerabilities to the KEV catalog:</p>
+<ul>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-111357">CVE-2026-111357</a>: missing authentication for a critical function, privilege escalation for a local authenticated attacker. Federal due date 2 November 2026, with forensic triage required. That date has already passed.</li>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-118527">CVE-2026-118527</a>: generation of predictable numbers or identifiers, letting a remote authenticated attacker upload files with attacker controlled content to a known location on disk. Federal due date 13 November 2026.</li>
+</ul>
+<figure class="diagram">
+  <img src="assets/ivanti-connect-secure-kev-chain.png" alt="Ivanti Connect Secure response order: preserve evidence, shrink exposure, patch, hunt, rotate, rebuild." width="760" height="260"/>
+  <figcaption>Preserve evidence and shrink exposure before you patch. The hunt afterward is where you find out whether the box was already owned. · files: <a href="assets/ivanti-connect-secure-kev-chain.svg">svg</a> / <a href="assets/ivanti-connect-secure-kev-chain.png">png</a></figcaption>
+</figure>
+
+<p>KEV notes say both can be chained with <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-104935">CVE-2026-104935</a>, and that third ID is the part that makes this an edge problem. It went on KEV on <a href="https://www.scworld.com/news/cisa-adds-chained-ivanti-connect-secure-bug-to-its-exploited-list">13 October</a> with a 16 October due date, and KEV describes it as arbitrary command execution by a remote, unauthenticated attacker. The two new entries need an authenticated attacker on their own. Chained behind 104935, they do not.</p>
+<p><a href="https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/">Volexity</a> found the chain in the wild in early October on appliances that were fully patched at the time (22.8R2.4) and tracks the actor as <a href="https://thehackernews.com/2026/10/attackers-chain-three-ivanti-connect.html">UTA0576</a>. Ivanti fixed the login bypass on 13 October. The root escalation (111357) did not get a patch until <a href="https://tech-insider.org/?p=50354">29 October</a>. For about two weeks, a box patched for the front door could still be taken to root. This is not a single isolated bug. It is a path.</p>
+<p>If your org still runs Connect Secure on the internet edge, you already know the pattern. VPN and remote access appliances remain favorite targets because they sit outside most of the detection stack that covers laptops and servers.</p>
+<h2>The angle most ticket queues miss</h2>
+<p>A patch job answers &ldquo;is the hole closed?&rdquo; It does not answer &ldquo;did someone already walk through it?&rdquo;</p>
+<p>CISA&rsquo;s <a href="https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk">BOD 26-04 implementation guidance</a> makes that distinction explicit for federal agencies: for high urgency KEV cases, forensic triage belongs in the same response window as remediation. Private sector teams should copy that habit even when the directive does not bind them.</p>
+<p>This campaign shows why. Volexity reports the attacker deleted evidence of exploitation from the appliance debug logs and Linux audit logs, then went after Active Directory secrets, including LAPS passwords and BitLocker recovery keys (<a href="https://braindetox.kr/en/posts/ivanti_connect_secure_cve_2026_111357_118527_kev.html">summary</a>). The January 2024 Connect Secure chain (CVE-2023-46805 with CVE-2024-21887) taught the same lesson: a clean firmware bump says nothing about what already happened.</p>
+<h2>What the KEV descriptions imply for defenders</h2>
+<p>From CISA&rsquo;s short descriptions:</p>
+<ul>
+<li>CVE-2026-118527 is about predictable identifiers and attacker controlled file content landing in a known disk location. That is a persistence and staging friendly primitive once you have authenticated access.</li>
+<li>CVE-2026-111357 is privilege escalation when authentication to a critical function is missing for a local authenticated attacker.</li>
+</ul>
+<p>Together with the documented chain note, defenders should assume an authenticated foothold can become a higher privilege foothold with planted content. Do not design detections only around unauthenticated scanners. Watch authenticated abuse and post auth file writes too.</p>
+<h2>Detection and hunting without a PoC</h2>
+<p>Focus on evidence classes that do not require weaponized steps.</p>
+<p><strong>Exposure and inventory</strong></p>
+<ul>
+<li>Confirm every Connect Secure instance, including forgotten lab and DR units.</li>
+<li>Record build or version strings from the appliance itself, not from last year&rsquo;s spreadsheet.</li>
+<li>Note which units are internet exposed versus internal only.</li>
+</ul>
+<p><strong>Auth and session anomalies</strong></p>
+<ul>
+<li>Failed and successful admin logins from unusual geos or ASNs.</li>
+<li>New local accounts, unexpected privilege changes, and authentication events outside change windows.</li>
+<li>Spikes in authenticated API or admin UI activity that do not match help desk volume.</li>
+</ul>
+<p><strong>Filesystem and integrity</strong></p>
+<ul>
+<li>Unexpected files in web accessible or known writable paths after the KEV date.</li>
+<li>Run Ivanti&rsquo;s Integrity Checker Tool, internal and external. Do not treat a clean result as closure: CISA has warned the tool may not detect exploitation of CVE-2026-104935, and activity that lived only in memory can escape it.</li>
+<li>Gaps or truncation in the appliance debug and audit logs during October. This actor cleaned them, so missing data is itself a lead.</li>
+<li>Modified scheduled tasks, startup scripts, or atypical outbound callbacks from the appliance management plane.</li>
+</ul>
+<p><strong>Downstream blast radius</strong></p>
+<ul>
+<li>VPN session creation for dormant accounts.</li>
+<li>Lateral movement from the VPN subnet into Tier 0 or jump hosts shortly after suspicious appliance events.</li>
+<li>Credential use from VPN egress IPs that never appeared before.</li>
+</ul>
+<p>If your only alert is &ldquo;CVE scanner found Ivanti,&rdquo; you are late to your own incident.</p>
+<h2>Mitigation order that respects reality</h2>
+<ol>
+<li><strong>Preserve evidence</strong> where feasible: logs, config exports, disk images for critically exposed nodes.</li>
+<li><strong>Reduce exposure</strong> while you patch: restrict admin interfaces, tighten allow lists, disable unused services.</li>
+<li><strong>Upgrade to Ivanti&rsquo;s 29 October builds</strong>: 22.8R2.6 or 25.1.1.3 per <a href="https://tech-insider.org/?p=50354">public reporting</a>. If you run another 25.1.x line, confirm the matching fixed build in Ivanti&rsquo;s advisory. Boxes you patched on 13 October still need this.</li>
+<li><strong>Hunt for compromise</strong> from 1 October 2026 onward, not just around the 30 October KEV date. Exploitation of this chain started in early October.</li>
+<li><strong>Rotate trust</strong>: VPN user secrets where warranted, admin credentials, API keys, certificates if integrity is doubtful.</li>
+<li><strong>Rebuild</strong> when integrity cannot be established. Patching a rooted edge device is optimism, not engineering.</li>
+</ol>
+<p>For federal readers, map this against <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">BOD 26-04</a> timelines and triage steps. For everyone else, use the same sequence because attackers do not care whether you are FCEB.</p>
+<h2>What to tell the CISO in one paragraph</h2>
+<p>Two Ivanti Connect Secure flaws are on KEV as of <a href="https://www.cisa.gov/news-events/alerts/2026/10/30/cisa-adds-two-known-exploited-vulnerabilities-catalog">30 October 2026</a>, with due dates of 2 November and 13 November 2026. Chained with CVE-2026-104935 from 13 October, they give an unauthenticated attacker root, and the actor behind it cleaned logs and took AD secrets. Our response is inventory, exposure reduction, vendor fixes, and compromise assessment before we mark the risk closed.</p>
+<h2>Defender checklist</h2>
+<ul>
+<li>Complete Connect Secure inventory including nonprod</li>
+<li>Confirm internet exposure status per instance</li>
+<li>Upgrade every appliance to the 29 October builds, including ones patched on 13 October</li>
+<li>Run the Integrity Checker Tool, and do not stop there if it comes back clean</li>
+<li>Review admin auth, file integrity and log gaps from 1 October onward</li>
+<li>Rotate AD service accounts, LAPS passwords and BitLocker recovery keys reachable from the appliance if compromise cannot be ruled out</li>
+<li>Rebuild when integrity is uncertain</li>
+<li>Add edge appliance integrity monitoring to the standing control set</li>
+</ul>
+<p>Edge access products fail in public. Your response process should assume that, then prove the optimistic case with logs.</p>
+    <div class="sources"><h2>Sources</h2><ul><li><a href="https://www.cisa.gov/news-events/alerts/2026/10/30/cisa-adds-two-known-exploited-vulnerabilities-catalog">CISA: CISA adds two known exploited vulnerabilities to catalog (30 Oct 2026)</a></li>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-104935">CISA KEV entry: CVE-2026-104935</a></li>
+<li><a href="https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/">Volexity: a series of unauthenticated events, chained exploitation of Ivanti Connect Secure zero days</a></li>
+<li><a href="https://thehackernews.com/2026/10/attackers-chain-three-ivanti-connect.html">The Hacker News: attackers chain three Ivanti Connect Secure flaws</a></li>
+<li><a href="https://www.scworld.com/news/cisa-adds-chained-ivanti-connect-secure-bug-to-its-exploited-list">SC World: CISA adds chained Ivanti Connect Secure bug to its exploited list</a></li>
+<li><a href="https://tech-insider.org/?p=50354">Tech Insider: Ivanti Connect Secure zero days, fixes and federal deadlines</a></li>
+<li><a href="https://braindetox.kr/en/posts/ivanti_connect_secure_cve_2026_111357_118527_kev.html">Braindetox: Ivanti CVE-2026-111357 and 118527, KEV dates and checks</a></li>
+<li><a href="https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk">CISA: BOD 26-04 implementation guidance</a></li></ul></div>
+    <div class="tags">Tags: cve, ivanti, kev, vpn, edge, incident-response</div>
+  </article>
+</body>
+</html>

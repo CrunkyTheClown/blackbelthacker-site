@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Two PHP Flaws Hit CISA KEV: Inventory Beats the CVSS Debate | Black Belt Hacker</title>
+  <meta name="description" content="PHP2Shell (CVE-2026-109618, CVE-2026-109619) is on KEV. Fixed in 8.5.12, 8.4.27, 8.3.36 and 8.2.35. Build a runtime inventory and patch internet facing PHP first."/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>Two PHP Flaws Hit CISA KEV: Inventory Beats the CVSS Debate</h1>
+    <div class="meta">2026-11-08 · cve, php, kev, web, patch-management, detection</div>
+    <figure class="lead"><img src="assets/php-dual-kev-unauthenticated-rce-header.jpg" alt="A long dark server aisle where a few machines glow orange among the green." width="1600" height="905"/></figure>
+    
+
+    <p>On <a href="https://www.cisa.gov/news-events/alerts/2026/10/26/cisa-adds-two-known-exploited-vulnerabilities-catalog">26 October 2026</a>, CISA added the two PHP vulnerabilities researchers call PHP2Shell to KEV and updated its alert, <a href="https://content.govdelivery.com/accounts/USDHSCISA/bulletins/4309083">&ldquo;Critical Vulnerabilities in PHP Require Immediate Patching&rdquo;</a>:</p>
+<ul>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109618">CVE-2026-109618</a>: PHP memory corruption vulnerability that allows unauthenticated remote code execution. Due date 29 October 2026.</li>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109619">CVE-2026-109619</a>: PHP stale internal request-state vulnerability that allows unauthenticated remote code execution. Due date 29 October 2026.</li>
+</ul>
+<figure class="diagram">
+  <img src="assets/php-dual-kev-unauthenticated-rce.png" alt="PHP2Shell minimum safe builds per branch: 8.5.12, 8.4.27, 8.3.36, 8.2.35; PHP 8.1 and older get no upstream fix." width="720" height="255"/>
+  <figcaption>If a host is below these builds, it is in scope. 8.1 and older has no upstream fix at all. · files: <a href="assets/php-dual-kev-unauthenticated-rce.svg">svg</a> / <a href="assets/php-dual-kev-unauthenticated-rce.png">png</a></figcaption>
+</figure>
+
+<p>Unauthenticated RCE. Twice. Three calendar days for federal remediation from the alert, and that clock ran out on 29 October, ten days before this post. If you are still open, you are past the federal timeline.</p>
+<p>PHP shipped fixes on 21 October: <strong>8.5.12, 8.4.27, 8.3.36 and 8.2.35</strong>. Every earlier build on those branches is affected. PHP 8.1 and older get no fix from the project. PHP&rsquo;s release notes say there are no complete mitigations and updating is the only safe choice (<a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w">GHSA-w8hw-w9fx-j79w</a>, <a href="https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp">GHSA-6wmf-4rv5-p3rp</a>).</p>
+<p>On scoring: PHP&rsquo;s security team rates both 9.2 under CVSS 4.0, with high attack complexity. A 10.0 that circulated before release was never official. Do not let &ldquo;high complexity&rdquo; slow the ticket: CISA&rsquo;s listing means someone is already clearing that bar.</p>
+<h2>Which deployments are exposed</h2>
+<p>This is where the &ldquo;every PHP server is on fire&rdquo; framing needs a caveat. Exposure depends on how PHP runs. Per PHP&rsquo;s advisories, as <a href="https://braindetox.kr/en/posts/php_critical_rce_security_release_oct_2026.html">summarized here</a>:</p>
+<ul>
+<li><strong>CVE-2026-109618 (out of memory corruption):</strong> demonstrated on Apache mod_php with default input and memory limits. PHP-FPM is exposed under narrower conditions. FrankenPHP and LSAPI are rated likely susceptible from source review, not validated.</li>
+<li><strong>CVE-2026-109619 (stale request state):</strong> confirmed on both mod_php and FPM. Session upload progress, which is on by default, is one of the reachable paths. PHP 8.5 with <code>fatal_error_backtraces</code> enabled is the strongest case.</li>
+<li><strong>Stopgaps while you patch, not fixes:</strong> set <code>session.upload_progress.enabled=0</code> in php.ini, the FPM pool or server config, then restart workers (<code>ini_set()</code> and <code>.user.ini</code> are not enough), and set <code>fatal_error_backtraces=0</code> on 8.5. The advisories also discuss memory limit settings; read them before you touch <code>memory_limit</code> in production.</li>
+</ul>
+<p>So rank mod_php and FPM fleets serving the internet first. Do not drop CLI only hosts and container images from the inventory, because those images become web servers the moment someone reuses them.</p>
+<h2>The real failure mode is unknown PHP</h2>
+<p>Most mature orgs can patch &ldquo;the WordPress cluster&rdquo; or &ldquo;the Laravel API&rdquo; once someone names it. The failure is the PHP you forgot:</p>
+<ul>
+<li>Marketing microsites on cheap VPS hosts</li>
+<li>Vendor appliances that embed PHP</li>
+<li>Old shared hosting for a subsidiary brand</li>
+<li>CI images and container bases still shipping vulnerable runtimes</li>
+<li>Internal tools exposed through a reverse proxy that nobody labels as PHP</li>
+</ul>
+<p>If your vulnerability management program keys only off named applications, dual PHP KEVs will punch through the gaps. You need runtime and package inventory that answers &ldquo;where does <code>php</code> execute?&rdquo;</p>
+<h2>Defender angle</h2>
+<p>Treat this as an asset discovery drill with teeth, not a single CVE ticket.</p>
+<p><strong>Step 1: Find interpreters</strong></p>
+<ul>
+<li>Query package inventories for PHP packages across Linux fleets</li>
+<li>Scan container image registries for PHP base tags</li>
+<li>Identify web servers with PHP handlers (php-fpm, mod_php, CGI wrappers)</li>
+<li>Ask app owners for composer.lock and platform requirements, then verify on hosts</li>
+</ul>
+<p><strong>Step 2: Rank by exposure</strong></p>
+<ul>
+<li>Internet reachable first</li>
+<li>Partner exposed next</li>
+<li>Purely internal last, still scheduled</li>
+</ul>
+<p><strong>Step 3: Patch or isolate</strong></p>
+<ul>
+<li>Move to 8.5.12, 8.4.27, 8.3.36 or 8.2.35 or later, or to your distro&rsquo;s backport (for example Debian DSA-6574-1 and Ubuntu USN-8948-1 cover both CVEs). Check the running version on the host, not the package manifest.</li>
+<li>PHP 8.1 and older: there is no upstream fix. Upgrade the app or isolate it.</li>
+<li>If a legacy app cannot move yet, put it behind stronger access control and WAF rules while you plan the real fix</li>
+<li>Do not confuse &ldquo;WAF in place&rdquo; with &ldquo;patched&rdquo;</li>
+</ul>
+<h2>Detection while you catch up</h2>
+<p>Unauthenticated RCE attempts against web stacks are noisy if you look.</p>
+<ul>
+<li>Spike in anomalous requests to PHP endpoints that return 500s or worker crashes</li>
+<li>php-fpm or Apache/Nginx workers spawning unexpected child processes</li>
+<li>Web shells or newly written PHP files under document roots after 21 October 2026, when the fixes and details went public</li>
+<li>Outbound connections from web pools to rare destinations shortly after request spikes</li>
+<li>Integrity monitoring alerts on <code>*.php</code> under writable upload directories</li>
+</ul>
+<p>Also hunt for post exploitation that looks boring: new cron entries under www-data, unexpected <code>curl</code>/<code>wget</code> from web users, and modified <code>.user.ini</code> or <code>.htaccess</code> files.</p>
+<h2>Mitigation specifics worth doing once</h2>
+<ol>
+<li><strong>Pin and rebuild</strong> images instead of hoping hosts drift into safety.</li>
+<li><strong>Bake the stopgap settings into your base images</strong> (<code>session.upload_progress.enabled=0</code> unless an app needs it) so the next rebuild does not quietly undo them.</li>
+<li><strong>Separate upload directories</strong> from executable PHP paths. Old advice. Still ignored. Still how webshells live.</li>
+<li><strong>Centralize PHP version reporting</strong> in your CMDB or vulnerability dashboard so the next dual KEV does not start with a Slack scavenger hunt.</li>
+<li><strong>Ask vendors who run PHP for you</strong> (managed CMS, hosted plugins, appliances) for their patched version in writing. You cannot patch their runtime, but you still own the risk.</li>
+</ol>
+<p>Use CISA&rsquo;s updated PHP alert and PHP&rsquo;s own advisories together with the KEV entries, not instead of them.</p>
+<h2>What not to do</h2>
+<ul>
+<li>Do not wait for a perfect enterprise advisory packet before inventory starts.</li>
+<li>Do not mark closed because &ldquo;our main site is on Node now.&rdquo; Forgotten PHP is still PHP.</li>
+<li>Do not publish or rehearse exploit details in ops channels. You need impact and defense, not a lab session during an emergency.</li>
+</ul>
+<h2>Leadership brief</h2>
+<p>Two PHP remote code execution flaws are on KEV as of <a href="https://www.cisa.gov/news-events/alerts/2026/10/26/cisa-adds-two-known-exploited-vulnerabilities-catalog">26 October 2026</a>, both described by CISA as unauthenticated RCE, both due 29 October 2026 for federal agencies, a date that has passed. Fixed builds have been out since 21 October. Our bottleneck is inventory coverage, not debate about severity labels. We are enumerating PHP runtimes, patching internet exposed first, and hunting for webshell class follow on activity.</p>
+<h2>Checklist</h2>
+<ul>
+<li>Produce a PHP runtime inventory across hosts and images</li>
+<li>Identify internet exposed PHP services</li>
+<li>Move every host and image to 8.5.12, 8.4.27, 8.3.36, 8.2.35 or a distro backport; isolate anything on 8.1 or older</li>
+<li>Set <code>session.upload_progress.enabled=0</code> where apps do not need it</li>
+<li>Hunt for new PHP files and web worker anomalies from 21 October onward</li>
+<li>Rebuild images and lock package versions</li>
+<li>Schedule the leftover long tail with named owners</li>
+</ul>
+<p>When CISA drops two unauthenticated RCE KEVs on the same language runtime with a three day clock, the winners are the teams that already knew where that language runs. Everyone else is discovering production under fire.</p>
+    <div class="sources"><h2>Sources</h2><ul><li><a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w">PHP security advisory GHSA-w8hw-w9fx-j79w (CVE-2026-109618)</a></li>
+<li><a href="https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp">PHP security advisory GHSA-6wmf-4rv5-p3rp (CVE-2026-109619)</a></li>
+<li><a href="https://www.cisa.gov/news-events/alerts/2026/10/26/cisa-adds-two-known-exploited-vulnerabilities-catalog">CISA: CISA adds two known exploited vulnerabilities to catalog (26 Oct 2026)</a></li>
+<li><a href="https://content.govdelivery.com/accounts/USDHSCISA/bulletins/4309083">CISA bulletin: KEV additions and updated PHP alert</a></li>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109618">CISA KEV entry: CVE-2026-109618</a></li>
+<li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109619">CISA KEV entry: CVE-2026-109619</a></li>
+<li><a href="https://bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks">BleepingComputer: CISA confirms PHP2Shell vulnerabilities now exploited in attacks</a></li>
+<li><a href="https://braindetox.kr/en/posts/php_critical_rce_security_release_oct_2026.html">Braindetox: PHP critical RCE fix, affected conditions and stopgaps</a></li>
+<li><a href="https://pitstop.manageengine.com/portal/en/community/topic/security-alert-two-critical-php-rce-vulnerabilities-php2shell-rated-cvss-9-2-21-10-2026">ManageEngine: PHP2Shell patch listing (Debian DSA-6574-1, Ubuntu USN-8948-1)</a></li></ul></div>
+    <div class="tags">Tags: cve, php, kev, web, patch-management, detection</div>
+  </article>
+</body>
+</html>

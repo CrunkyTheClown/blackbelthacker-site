@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="GOLD OGRE / Aur0ra labor split: humans handle entry and ransomware; agents own post compromise.">
+  <rect width="720" height="280" fill="#ffffff"/>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5a5a5a"/>
+    </marker>
+  </defs>
+
+  
+    <text x="360" y="36" text-anchor="middle" fill="#1a1a1a"
+      font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-weight="600">
+      Who owns which phase
+    </text>
+    
+    <rect x="40" y="80" width="200" height="120" rx="8" fill="#0b3d2e"/>
+    <text x="140.0" y="136.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">Human</text>
+    <text x="140.0" y="156.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">VPN / foothold</text>
+    
+    
+    <rect x="260" y="80" width="200" height="120" rx="8" fill="#8a2e0b"/>
+    <text x="360.0" y="136.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">AI agent</text>
+    <text x="360.0" y="156.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">AD / creds / move</text>
+    
+    
+    <rect x="480" y="80" width="200" height="120" rx="8" fill="#0b3d2e"/>
+    <text x="580.0" y="136.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">Human</text>
+    <text x="580.0" y="156.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">ransomware deploy</text>
+    
+    
+    <line x1="240" y1="140" x2="260" y2="140" stroke="#5a5a5a" stroke-width="2"
+      marker-end="url(#arrowhead)"/>
+    
+    
+    
+    <line x1="460" y1="140" x2="480" y2="140" stroke="#5a5a5a" stroke-width="2"
+      marker-end="url(#arrowhead)"/>
+    
+    
+    <text x="360" y="240" text-anchor="middle" fill="#5a5a5a"
+      font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">
+      Detect the middle: LDAP enum, Kerberoasting, coercion, share staging
+    </text>
+    
+</svg>

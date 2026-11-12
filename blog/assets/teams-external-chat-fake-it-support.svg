@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="Fake IT support path: email bomb, external Teams chat, remote assist, then hands on keyboard.">
+  <rect width="720" height="280" fill="#ffffff"/>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#5a5a5a"/>
+    </marker>
+  </defs>
+
+  
+    <text x="360" y="36" text-anchor="middle" fill="#1a1a1a"
+      font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-weight="600">
+      Collaboration as initial access
+    </text>
+    
+    <rect x="20" y="90" width="150" height="80" rx="8" fill="#5a1f0c"/>
+    <text x="95.0" y="126.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">Email bomb</text>
+    <text x="95.0" y="146.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">noise flood</text>
+    
+    
+    <rect x="195" y="90" width="150" height="80" rx="8" fill="#8a2e0b"/>
+    <text x="270.0" y="126.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">Teams chat</text>
+    <text x="270.0" y="146.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">fake IT</text>
+    
+    
+    <rect x="370" y="90" width="150" height="80" rx="8" fill="#8a2e0b"/>
+    <text x="445.0" y="126.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">Quick Assist</text>
+    <text x="445.0" y="146.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">or RMM</text>
+    
+    
+    <rect x="545" y="90" width="150" height="80" rx="8" fill="#0b3d2e"/>
+    <text x="620.0" y="126.0" text-anchor="middle"
+      fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif"
+      font-size="14" font-weight="600">Hands on</text>
+    <text x="620.0" y="146.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">keyboard</text>
+    
+    
+    <line x1="170" y1="130" x2="195" y2="130" stroke="#5a5a5a" stroke-width="2"
+      marker-end="url(#arrowhead)"/>
+    
+    
+    
+    <line x1="345" y1="130" x2="370" y2="130" stroke="#5a5a5a" stroke-width="2"
+      marker-end="url(#arrowhead)"/>
+    
+    
+    
+    <line x1="520" y1="130" x2="545" y2="130" stroke="#5a5a5a" stroke-width="2"
+      marker-end="url(#arrowhead)"/>
+    
+    
+    <text x="360" y="220" text-anchor="middle" fill="#5a5a5a"
+      font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">
+      Fix: federation allow list + remote support restrictions
+    </text>
+    <text x="360" y="250" text-anchor="middle" fill="#5a5a5a"
+      font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">
+      Arctic Wolf: 400+ incidents abusing default external access
+    </text>
+    
+</svg>

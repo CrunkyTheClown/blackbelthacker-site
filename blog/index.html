@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog · Black Belt Hacker</title>
+  <meta name="description" content="Defender-first notes on CVEs, KEVs, incidents, and response order.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#07080f">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="/logo-mark.svg">
+  <style>
+    :root {
+      --bg: #07080f;
+      --panel: #0d1019;
+      --ink: #e8fbff;
+      --muted: #8f9bb3;
+      --line: #1d2333;
+      --cyan: #3df0ff;
+      --magenta: #ff2bd6;
+      --red: #ff2a3d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background:
+        radial-gradient(ellipse at 50% -10%, rgba(255, 43, 214, 0.14), transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(61, 240, 255, 0.07), transparent 45%),
+        linear-gradient(rgba(61, 240, 255, 0.035) 1px, transparent 1px) 0 0 / 30px 30px,
+        linear-gradient(90deg, rgba(61, 240, 255, 0.035) 1px, transparent 1px) 0 0 / 30px 30px,
+        var(--bg);
+      color: var(--ink);
+      font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 40px;
+      flex: 1;
+    }
+    .site-nav a {
+      color: var(--cyan);
+      text-decoration: none;
+      margin-right: 1rem;
+      font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace;
+    }
+    .site-nav a:hover { text-decoration: underline; }
+    h1 {
+      font: 700 28px/1.2 system-ui, sans-serif;
+      margin: 1rem 0 0.5rem;
+    }
+    .lede { color: var(--muted); margin: 0 0 28px; }
+    .belt {
+      height: 6px;
+      margin: 0 0 28px;
+      background: linear-gradient(90deg, transparent, #12141c 8%, #12141c 82%, var(--red) 82%, var(--red) 90%, #12141c 90%, #12141c 92%, transparent);
+      box-shadow: 0 0 0 1px rgba(255, 43, 214, 0.35);
+      border-radius: 2px;
+    }
+    ul.posts { list-style: none; padding: 0; margin: 0; }
+    ul.posts li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--magenta);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    ul.posts li:hover, ul.posts li:focus-within {
+      border-color: var(--cyan);
+      box-shadow: 0 0 22px rgba(61, 240, 255, 0.15);
+    }
+    ul.posts a { color: var(--ink); font-weight: 600; text-decoration: none; }
+    ul.posts a:hover, ul.posts a:focus { color: var(--cyan); }
+    ul.posts span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    footer {
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      color: var(--muted);
+      font: 13px/1.6 ui-monospace, Menlo, Consolas, monospace;
+      border-top: 1px solid var(--line);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+    <h1>Blog</h1>
+    <p class="lede">Defender-first notes on KEVs, incidents, and response order.</p>
+    <div class="belt" aria-hidden="true"></div>
+    <ul class="posts">
+      <li><a href="2026-11-11-maersk-confirms-data-breach-as-whitearmor-ransomware-demands-5-million.html">Maersk Confirms a Data Breach as WhiteArmor Demands $5 Million</a><span>2026-11-11 · cybersecurity, ransomware, logistics, incident-response</span></li>
+      <li><a href="2026-11-11-barracuda-esg-auth-bypass-command-injection-chain.html">Barracuda ESG Auth Bypass and Command Injection Are One Incident</a><span>2026-11-11 · cve, barracuda, kev, email-security, detection</span></li>
+      <li><a href="2026-11-10-ivanti-connect-secure-kev-chain.html">Ivanti Connect Secure Is on CISA KEV Again: Hunt, Then Patch</a><span>2026-11-10 · cve, ivanti, kev, vpn, edge, incident-response</span></li>
+      <li><a href="2026-11-09-gitlab-ci-regex-rce-cve-2026-97229.html">GitLab CI Regex RCE Is on CISA KEV: Treat CI Hosts as Production</a><span>2026-11-09 · cve, gitlab, kev, cicd, supply-chain, detection</span></li>
+      <li><a href="2026-11-08-php-dual-kev-unauthenticated-rce.html">Two PHP Flaws Hit CISA KEV: Inventory Beats the CVSS Debate</a><span>2026-11-08 · cve, php, kev, web, patch-management, detection</span></li>
+      <li><a href="2026-11-07-cpguard-update-channel-supply-chain.html">cPGuard Update Channel Hijacked: Rotate Secrets Before You Call It Done</a><span>2026-11-07 · incident, supply-chain, linux, hosting, ir</span></li>
+      <li><a href="2026-11-06-amadeus-airline-booking-data-breach.html">Amadeus Booking Data Breach: What Airlines Should Check Next</a><span>2026-11-06 · updated 2026-11-11 with Thai Airways&rsquo; 9 November notice · incident, third-party, airlines, privacy, detection</span></li>
+      <li><a href="2026-11-05-idc-frontier-cloud-ransomware-blast-radius.html">IDC Frontier Ransomware: Cloud Snapshots Were Inside the Blast Radius</a><span>2026-11-05 · updated 2026-11-11 with SoftBank&rsquo;s 9 November briefing · incident, ransomware, cloud, backups, japan</span></li>
+      <li><a href="2026-11-04-aur0ra-gold-ogre-ai-agents.html">Aur0ra and GOLD OGRE Put AI Agents in the Kill Chain</a><span>2026-11-04 · trend, ransomware, ai, detection, gold-ogre, aur0ra</span></li>
+      <li><a href="2026-11-03-bod-26-04-kev-forensic-triage-for-defenders.html">CISA BOD 26-04: Risk-Based Patch Clocks, Then Prove You Were Not Owned</a><span>2026-11-03 · trend, cisa, kev, vulnerability-management, ir</span></li>
+      <li><a href="2026-11-02-teams-external-chat-fake-it-support.html">Fake IT Support Scams Are Abusing Microsoft Teams Chat</a><span>2026-11-02 · trend, microsoft-teams, social-engineering, ransomware, detection</span></li>
+    </ul>
+  </main>
+  <footer>© 2026 blackbelthacker.com</footer>
+</body>
+</html>

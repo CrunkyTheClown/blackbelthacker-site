@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>IDC Frontier Ransomware: Cloud Snapshots Were Inside the Blast Radius | Black Belt Hacker</title>
+  <meta name="description" content="IDCF Cloud ransomware on 7 Oct 2026 hit 495 customers. IDC Frontier traced entry to open source software in the portal's authentication system. The lesson is recovery design."/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>IDC Frontier Ransomware: Cloud Snapshots Were Inside the Blast Radius</h1>
+    <div class="meta">2026-11-05 · updated 2026-11-11 with SoftBank&rsquo;s 9 November briefing · incident, ransomware, cloud, backups, japan</div>
+    <figure class="lead"><img src="assets/idc-frontier-cloud-ransomware-blast-radius-header.jpg" alt="A frosted, cracked glass enclosure of server racks with a small green backup drive sitting safely outside." width="1600" height="905"/></figure>
+    
+
+    <p>At about 03:40 on <a href="https://www.watch.impress.co.jp/docs/news/2146693.html">7 October 2026</a>, ransomware hit IDC Frontier&rsquo;s IDCF Cloud service in East Japan Region 1, affecting <a href="https://www.bleepingcomputer.com/news/security/ransomware-attack-disrupts-japans-idcf-cloud-used-by-govt-clients/">495 companies and local governments</a>. In its <a href="https://atmarkit.itmedia.co.jp/ait/articles/2610/29/news044.html">seventh notice on 27 October</a>, IDC Frontier said the attacker exploited a vulnerability in open source software used by the IDCF Cloud portal&rsquo;s authentication system, then went through the management console to take administrator rights over the virtualization platform and encrypt customer virtual servers. IDC Frontier has not named the component. Social media guesses about which project it was are guesses.</p>
+<figure class="diagram">
+  <img src="assets/idc-frontier-cloud-ransomware-blast-radius.png" alt="IDCF Cloud: OSS flaw in the portal's authentication led to management console and virtualization admin rights; VMs and in-region data shared fate; only out of band backups helped." width="720" height="320"/>
+  <figcaption>Portal auth to platform admin. Everything inside the box shared fate; only backups outside it helped. · files: <a href="assets/idc-frontier-cloud-ransomware-blast-radius.svg">svg</a> / <a href="assets/idc-frontier-cloud-ransomware-blast-radius.png">png</a></figcaption>
+</figure>
+
+<p>SoftBank Corp. CEO Junichi Miyakawa addressed the incident at the <a href="https://www.softbank.jp/en/corp/ir/documents/presentations/fy2026/q2_earnings_summary/">9 November results briefing</a>. According to <a href="https://www.digitaltoday.co.kr/en/view/123886/softbank-tightens-security-response-after-constant-vulnerabilities">Digital Today&rsquo;s report</a>, he apologized and said group security inspections would expand to cover open source software that had been outside prior checks. That admission matters more than most of the dramatic secondary commentary around Japan&rsquo;s broader cyber news cycle.</p>
+<p>Sysdig&rsquo;s <a href="https://www.sysdig.com/blog/security-briefing-october-2026">October 2026 briefing</a> likewise frames the event as a SoftBank subsidiary cloud ransomware incident beginning 7 October with impact across hundreds of organizations.</p>
+<h2>What is solid vs what to leave out</h2>
+<p>Solid enough for defender writing:</p>
+<ul>
+<li>Date: 7 October 2026</li>
+<li>Provider: IDC Frontier / IDCF Cloud</li>
+<li>Impact scale: 495 companies and local governments, in four zones (tesla, henry, pascal, joule) of East Japan Region 1</li>
+<li>Entry per IDC Frontier: an unnamed open source component in the portal&rsquo;s authentication system, then the management console, then virtualization admin rights</li>
+<li>Recovery: on 8 October IDC Frontier said data in the affected zones would be <a href="https://atmarkit.itmedia.co.jp/ait/articles/2610/09/news036.html">hard to extract or restore</a> and that recovery would need customers&rsquo; own backups</li>
+<li>Data: no sign of exfiltration from virtual servers, but portal registration data for up to 71 companies was improperly viewed and up to four portal passwords were changed (<a href="https://atmarkit.itmedia.co.jp/ait/articles/2610/29/news044.html">27 October findings</a>)</li>
+</ul>
+<p>Leave out unverified ransom notes, hypervisor counts, and citizen record totals that circulate without a primary notice behind them. Attacker claims are not inventory.</p>
+<h2>The angle: shared fate recovery</h2>
+<p>In positional grappling, control of where you can stand up matters as much as the submission attempt. Cloud ransomware against a provider region is the same idea. If snapshots, management consoles, and virtualization control sit in the same trust domain as the workloads, customers discover they never had an independent stand up path.</p>
+<p>IDC Frontier&rsquo;s own notices show the shape. It cut the network and stopped systems in East Japan Region 1, then suspended the externally reachable management consoles in its other regions as a precaution. Then it told customers that data in the four zones would have to come back from their own backups. At least one prefecture reported it could not reach its backup data after the provider went down (<a href="https://www.mlex.com/mlex/data-privacy-security/articles/2535496">MLex</a>).</p>
+<p>If your &ldquo;backup strategy&rdquo; is &ldquo;the cloud button,&rdquo; you are renting hope.</p>
+<h2>Defender actions for cloud customers</h2>
+<p><strong>Before the next provider incident</strong></p>
+<ul>
+<li>Maintain offline or cross account backups that the primary provider console cannot mass delete with one privileged identity</li>
+<li>Test restores to a second cloud or on prem landing zone quarterly</li>
+<li>Document break glass contacts that do not depend on the provider&rsquo;s customer portal being healthy</li>
+<li>Know which workloads are irreplaceable in 24 hours vs rebuildable in a week</li>
+</ul>
+<p><strong>Identity and portal risk</strong></p>
+<p>IDC Frontier&rsquo;s finding is a reminder that the customer portal is part of the attack surface for the fleet, not a boring billing website. Customers should:</p>
+<ul>
+<li>Use unique, phishing resistant auth where the provider offers it</li>
+<li>Limit portal admin seats</li>
+<li>Monitor for unexpected portal password changes and API token creation</li>
+<li>Segment automation identities that can stop or encrypt large sets of instances</li>
+</ul>
+<p><strong>Detection from the customer side</strong></p>
+<p>You may not see the provider&rsquo;s hypervisor layer. You can still watch:</p>
+<ul>
+<li>Mass instance stop or unreachable events across an availability set</li>
+<li>Sudden loss of management API access</li>
+<li>Unexpected snapshot deletions</li>
+<li>Ransom notes on attached volumes or in instance console output</li>
+<li>Cross account role anomalies if you use organization level access into the provider</li>
+</ul>
+<h2>Defender actions for cloud operators</h2>
+<p>If you run multi tenant infrastructure:</p>
+<ul>
+<li>Inventory open source auth components with the same seriousness as first party code</li>
+<li>Separate backup storage control planes from production virtualization admin</li>
+<li>Require dual control for mass snapshot deletion</li>
+<li>Practice regional isolation drills that assume portal compromise</li>
+<li>Publish customer facing integrity status that distinguishes &ldquo;workloads down&rdquo; from &ldquo;backups verified intact&rdquo;</li>
+</ul>
+<p>The response direction SoftBank described, expanding OSS inspection and automating more vulnerability diagnosis, is the minimum lesson. Shared hosting of recovery copies without hard isolation is the expensive lesson.</p>
+<h2>How to brief executives without mythology</h2>
+<p>Skip attacker mythology and speculation about tools. IDC Frontier attributed a concrete class of failure: open source in portal authentication that led to platform admin rights, plus cascading customer impact in a cloud region. The business question is whether your critical workloads have recovery paths that survive provider console loss.</p>
+<h2>Contract and assurance questions worth sending</h2>
+<p>Send these to cloud and hosting providers before you need them:</p>
+<ul>
+<li>Can a single compromised portal identity delete or encrypt snapshots across a region?</li>
+<li>Are backup control planes in a separate trust boundary from compute admin?</li>
+<li>What is the customer notification SLA for ransomware versus generic outage?</li>
+<li>Do you inventory and patch open source components in authentication the same way you patch first party services?</li>
+</ul>
+<p>IDC Frontier&rsquo;s own findings show the gap was real for them. Your provider answers will tell you whether you are buying compute or buying shared fate.</p>
+<h2>Checklist</h2>
+<ul>
+<li>Identify workloads that cannot tolerate provider region ransomware</li>
+<li>Verify backups that are immutable to the primary provider admin role</li>
+<li>Test a restore that does not use the primary customer portal</li>
+<li>Review portal admin count and MFA strength</li>
+<li>Ask providers how snapshot deletion is authorized and logged</li>
+<li>Add OSS auth components to your own SBOM and scan scope where you operate platforms</li>
+</ul>
+<p>Provider ransomware turns customer security into a dependency graph problem. Draw the graph now, while your snapshots still open.</p>
+    <div class="sources"><h2>Sources</h2><ul><li><a href="https://www.watch.impress.co.jp/docs/news/2146693.html">Impress Watch: IDCF Cloud outage caused by ransomware, 495 companies and local governments affected (8 Oct)</a></li>
+<li><a href="https://www.bleepingcomputer.com/news/security/ransomware-attack-disrupts-japans-idcf-cloud-used-by-govt-clients/">BleepingComputer: ransomware attack disrupts Japan's IDCF Cloud used by government clients</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/2610/09/news036.html">ITmedia @IT: some customer data hard to recover (9 Oct)</a></li>
+<li><a href="https://atmarkit.itmedia.co.jp/ait/articles/2610/29/news044.html">ITmedia @IT: full picture of the IDCF ransomware attack, OSS vulnerability exploited (29 Oct)</a></li>
+<li><a href="https://www.mlex.com/mlex/data-privacy-security/articles/2535496">MLex: Japan cloud ransomware attack exposes municipal backup vulnerabilities</a></li>
+<li><a href="https://www.softbank.jp/en/corp/ir/documents/presentations/fy2026/q2_earnings_summary/">SoftBank Corp.: Q2 FY2026 results briefing summary (9 Nov)</a></li>
+<li><a href="https://www.digitaltoday.co.kr/en/view/123886/softbank-tightens-security-response-after-constant-vulnerabilities">Digital Today: SoftBank tightens security response</a></li>
+<li><a href="https://www.sysdig.com/blog/security-briefing-october-2026">Sysdig: security briefing, October 2026</a></li></ul></div>
+    <div class="tags">Tags: incident, ransomware, cloud, backups, japan</div>
+  </article>
+</body>
+</html>

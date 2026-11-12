@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Black Belt Hacker</title>
+  <meta name="description" content="Family planning tools and personal technology projects.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#07080f">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/svg+xml" href="logo-mark.svg">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <style>
+    :root {
+      --bg: #07080f;
+      --panel: #0d1019;
+      --ink: #e8fbff;
+      --muted: #8f9bb3;
+      --line: #1d2333;
+      --cyan: #3df0ff;
+      --magenta: #ff2bd6;
+      --red: #ff2a3d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background:
+        radial-gradient(ellipse at 50% -10%, rgba(255, 43, 214, 0.14), transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(61, 240, 255, 0.07), transparent 45%),
+        linear-gradient(rgba(61, 240, 255, 0.035) 1px, transparent 1px) 0 0 / 30px 30px,
+        linear-gradient(90deg, rgba(61, 240, 255, 0.035) 1px, transparent 1px) 0 0 / 30px 30px,
+        var(--bg);
+      color: var(--ink);
+      font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+    }
+    main {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 20px 40px;
+      flex: 1;
+    }
+    .hero { text-align: center; margin-bottom: 28px; }
+    .hero img {
+      width: min(360px, 100%);
+      height: auto;
+      aspect-ratio: 1;
+      display: block;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 0 0 1px var(--line), 0 0 40px rgba(61, 240, 255, 0.12), 0 0 80px rgba(255, 43, 214, 0.08);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .lede {
+      color: var(--muted);
+      font-size: 19px;
+      margin: 0 0 40px;
+      text-align: center;
+    }
+    h2 {
+      font: 600 13px/1.4 ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      text-shadow: 0 0 10px rgba(61, 240, 255, 0.55);
+      margin: 0 0 12px;
+    }
+    h2::before { content: "> "; color: var(--magenta); }
+    ul.links { list-style: none; padding: 0; margin: 0 0 40px; }
+    ul.links li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--magenta);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    ul.links li:hover, ul.links li:focus-within {
+      border-color: var(--cyan);
+      box-shadow: 0 0 22px rgba(61, 240, 255, 0.15);
+    }
+    ul.links a { color: var(--ink); font-weight: 600; text-decoration: none; }
+    ul.links a:hover, ul.links a:focus { color: var(--cyan); }
+    ul.links span { display: block; color: var(--muted); font-size: 15px; }
+    p { margin: 0 0 16px; }
+    .belt {
+      height: 6px;
+      margin: 0 0 32px;
+      background: linear-gradient(90deg, transparent, #12141c 8%, #12141c 82%, var(--red) 82%, var(--red) 90%, #12141c 90%, #12141c 92%, transparent);
+      box-shadow: 0 0 0 1px rgba(255, 43, 214, 0.35);
+      border-radius: 2px;
+    }
+    footer {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      color: var(--muted);
+      font: 13px/1.6 ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+      border-top: 1px solid var(--line);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="hero">
+      <picture>
+        <source srcset="logo-glitch.gif" media="(prefers-reduced-motion: no-preference)">
+        <img src="logo-square.png" width="600" height="600" alt="Black Belt Hacker logo: a black belt with a red tip tied around a neon circuit hexagon, with a terminal prompt in the knot">
+      </picture>
+      <h1 class="sr-only">Black Belt Hacker</h1>
+    </div>
+    <p class="lede">Family planning tools and personal technology projects.</p>
+    <div class="belt" aria-hidden="true"></div>
+
+    <h2>About</h2>
+    <p>This domain hosts a few small, private tools I build and run for my household, plus notes on home technology and automation projects. There is nothing to download here, no ads and no tracking.</p>
+
+    <h2 style="margin-top:32px">Projects</h2>
+    <ul class="links">
+      <li>
+        <a href="https://kanban.blackbelthacker.com">Family planner</a>
+        <span>A private task board for our household. Sign-in required (family only).</span>
+      </li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>For questions about this site, use the contact details on my public profiles.</p>
+  </main>
+  <footer>© 2026 blackbelthacker.com</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 265" role="img" aria-label="Barracuda ESG chain: unauthenticated config restore plants a timezone value that later runs as root.">
+  <rect width="720" height="265" fill="#ffffff"/>
+  <defs><marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a5a5a"/></marker></defs>
+  <text x="360.0" y="34" text-anchor="middle" fill="#1a1a1a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-weight="600">Barracuda ESG chain (KEV 10 Nov, due 13 Nov 2026)</text>
+  <rect x="25" y="80" width="200" height="100" rx="8" fill="#0b3d2e"/>
+  <text x="125.0" y="117.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="14" font-weight="600">CVE-2026-116606</text>
+  <text x="125.0" y="135.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">No login needed</text>
+  <text x="125.0" y="153.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">Admin UI reachable</text>
+  <rect x="260" y="80" width="200" height="100" rx="8" fill="#245c46"/>
+  <text x="360.0" y="117.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="14" font-weight="600">Crafted backup restore</text>
+  <text x="360.0" y="135.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">Global config replaced</text>
+  <text x="360.0" y="153.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">incl. timezone value</text>
+  <rect x="495" y="80" width="200" height="100" rx="8" fill="#8a2e0b"/>
+  <text x="595.0" y="117.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="14" font-weight="600">CVE-2026-111560</text>
+  <text x="595.0" y="135.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">Timezone value runs</text>
+  <text x="595.0" y="153.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">as a root command</text>
+  <line x1="225" y1="130" x2="258" y2="130" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="460" y1="130" x2="493" y2="130" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="360.0" y="222" text-anchor="middle" fill="#5a5a5a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">ESG is the only product with both bugs.</text>
+  <text x="360.0" y="244" text-anchor="middle" fill="#5a5a5a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">On ADC, WAF, WCC, WSG and Message Archiver, 111560 still needs an admin login.</text>
+</svg>

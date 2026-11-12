@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CISA BOD 26-04: Risk-Based Patch Clocks, Then Prove You Were Not Owned | Black Belt Hacker</title>
+  <meta name="description" content="BOD 26-04 prioritizes patches by exposure, KEV status, exploit automation, and technical impact, and expects forensic triage. Private sector should copy the model."/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>CISA BOD 26-04: Risk-Based Patch Clocks, Then Prove You Were Not Owned</h1>
+    <div class="meta">2026-11-03 · trend, cisa, kev, vulnerability-management, ir</div>
+    <figure class="lead"><img src="assets/bod-26-04-kev-forensic-triage-for-defenders-header.jpg" alt="A blank orange countdown timer on a desk with evidence folders and a magnifying glass under a green lamp." width="1600" height="905"/></figure>
+    
+
+    <p>When CISA put Ivanti Connect Secure CVE-2026-111357 on KEV on 30 October, the entry came with a three day due date and a forensic triage flag. PHP2Shell got a three day clock on 26 October. Both clocks come from <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">Binding Operational Directive 26-04</a>. It is a federal mandate. It is also one of the cleaner vulnerability prioritization writeups CISA has published in years. Non federal defenders should lift the decision model even if the compliance deadlines are not yours.</p>
+<figure class="diagram">
+  <img src="assets/bod-26-04-kev-forensic-triage-for-defenders.png" alt="BOD 26-04: four inputs set the clock; only KEV plus total control carries forensic triage." width="720" height="320"/>
+  <figcaption>Only the top tier carries forensic triage. Your triage effort should scale the same way. · files: <a href="assets/bod-26-04-kev-forensic-triage-for-defenders.svg">svg</a> / <a href="assets/bod-26-04-kev-forensic-triage-for-defenders.png">png</a></figcaption>
+</figure>
+
+<p>Issued <a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">10 June 2026</a>, BOD 26-04 revokes and replaces BOD 19-02 (internet accessible systems) and BOD 22-01, the 2021 directive that created the KEV catalog (<a href="https://www.securityweek.com/cisa-directs-federal-agencies-to-prioritize-security-patches-based-on-risk/">SecurityWeek</a>, <a href="https://www.tenable.com/blog/cisa-bod-26-04-FAQ-vulnerability-remediation-impact">Tenable</a>). The catalog stays. The flat KEV deadline does not. It tells Federal Civilian Executive Branch agencies to stop treating every CVE like equal homework. Urgency hinges on four variables:</p>
+<ol>
+<li>Asset exposure: is it publicly exposed?</li>
+<li>KEV status: is the CVE in CISA&rsquo;s Known Exploited Vulnerabilities catalog?</li>
+<li>Exploit automation: can an adversary automate the exploit steps?</li>
+<li>Technical impact: partial control or total control after exploitation?</li>
+</ol>
+<p>CISA&rsquo;s accompanying <a href="https://www.cisa.gov/news-events/news/cisa-issues-new-directive-improving-how-federal-agencies-prioritize-mitigation-cyber-vulnerabilities">news release</a> is blunt about two modern pressures: AI may shrink the time between patch and exploit, and applying a patch generally does not evict an actor who already got in. That second sentence should be taped above every vuln management standup.</p>
+<h2>The clocks</h2>
+<p>The four variables combine into tiers. As <a href="https://www.tenable.com/blog/cisa-bod-26-04-FAQ-vulnerability-remediation-impact">Tenable summarizes them</a>:</p>
+<ul>
+<li><strong>3 days plus forensic triage:</strong> in KEV and yields total control. Exposure and automation do not change this tier.</li>
+<li><strong>3 days:</strong> other high risk combinations, for example publicly exposed, automatable and total control, even before a KEV listing.</li>
+<li><strong>14 days:</strong> most other KEV entries and several high risk non KEV combinations.</li>
+<li><strong>60 days:</strong> lower risk combinations, for example not exposed, automatable, partial control.</li>
+<li><strong>Fix on upgrade:</strong> meets none of the four criteria.</li>
+</ul>
+<p>The full 16 combination matrix is Table 1 in Appendix A of the directive. Read it there before you encode it in policy. Agencies had 60 days to move their processes to the tiered model and 180 days, so roughly December 2026, to meet the full timelines.</p>
+<h2>Why this matters outside government</h2>
+<p>Most enterprise backlog fights are still CVSS theater plus whoever yelled last. BOD 26-04 formalizes a better queue:</p>
+<ul>
+<li>Internet exposed + known exploited + total control should burn the calendar.</li>
+<li>Internal only + not exploited + limited impact can wait for a planned upgrade window.</li>
+<li>The catalog still matters, but context around exposure and impact changes the clock.</li>
+</ul>
+<p>You can implement that without CDM dashboards or FedRAMP paperwork. You need asset exposure tags, a KEV feed, and an agreed definition of &ldquo;total control&rdquo; for your environment.</p>
+<h2>Forensic triage is part of remediation</h2>
+<p>The <a href="https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk">implementation guidance</a> walks agencies through scoped triage when a KEV lands hard:</p>
+<ul>
+<li>Scope quickly after the KEV addition</li>
+<li>Preserve volatile evidence before you blindly remediate</li>
+<li>Patch after collection when possible</li>
+<li>Contain without theatrical moves that tip the actor if you can avoid it</li>
+<li>Decide whether to escalate based on triage findings</li>
+</ul>
+<p>Private sector IR teams already know this sequence. Vulnerability management teams often skip it because the metric is &ldquo;percent patched,&rdquo; not &ldquo;percent verified not compromised.&rdquo; BOD 26-04 pushes those functions back together for the worst class of bugs.</p>
+<p>If your process is &ldquo;scanner finds KEV, change ticket patches, ticket closes,&rdquo; you are optimizing the wrong scoreboard.</p>
+<h2>A practical private sector adaptation</h2>
+<p><strong>Data you need</strong></p>
+<ul>
+<li>Public exposure flag per asset (internet, partner, internal)</li>
+<li>Product and version inventory good enough to match KEV entries</li>
+<li>Owner and patch window metadata</li>
+<li>Logging sufficient for triage on high value assets</li>
+</ul>
+<p><strong>Decision rule of thumb</strong></p>
+<ul>
+<li>KEV + total control, exposed or not: three day clock with triage, mirroring the directive&rsquo;s top tier. Preauthorize the emergency change so the clock is spent fixing, not approving.</li>
+<li>KEV with partial control: the 14 day tier for most combinations. Still urgent; sequence by crown jewel adjacency</li>
+<li>Not KEV + public + automatable total control: still high, watch EPSS and exploit intel, do not sleep</li>
+<li>Meets none of the four criteria: fix on upgrade. Track it, do not pretend it is a SEV 1</li>
+</ul>
+<p><strong>Operating cadence</strong></p>
+<ul>
+<li>Subscribe to KEV updates</li>
+<li>Daily KEV diff reviewed by a human, not only a silent automation</li>
+<li>Preauthorized emergency change path for edge KEVs</li>
+<li>Named triage owner for internet exposed KEV hits</li>
+</ul>
+<h2>Detection and process controls to add this quarter</h2>
+<ul>
+<li>Alert when a newly added KEV matches an internet tagged asset</li>
+<li>Require a triage note before closing KEV tickets on internet facing systems</li>
+<li>Store pre patch evidence links (log bundles, memory capture where justified) in the ticket</li>
+<li>Measure mean time from KEV publication to exposure confirmed, not only to patch installed</li>
+<li>Run a tabletop: &ldquo;KEV drops at 4pm Friday for our VPN product&rdquo;</li>
+</ul>
+<h2>What BOD 26-04 is not</h2>
+<p>It is not permission to ignore everything outside KEV. The directive still has agencies build their processes on CVE and KEV data broadly, not just the catalog (<a href="https://www.paubox.com/blog/cisa-orders-agencies-to-patch-the-most-dangerous-flaws-within-three-days">summary</a>). For enterprises, KEV is a prioritization accelerator, not a complete vulnerability program.</p>
+<p>It is also not a reason to collect forensic images for every medium CVE on a printer. Triage intensity should follow the same risk variables as the patch clock.</p>
+<h2>Leadership summary</h2>
+<p><a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">BOD 26-04</a> replaces older federal patch directives with risk based timelines driven by exposure, KEV status, automatable exploitation, and technical impact. It also expects compromise checks because patches do not remove established access. We should adopt the same queue logic and attach triage to internet exposed KEV responses.</p>
+<h2>Example ticket fields worth mandating</h2>
+<p>For internet exposed KEV items, require:</p>
+<ul>
+<li>Exposure confirmation timestamp</li>
+<li>Evidence preserved (yes/no and link)</li>
+<li>Patch or isolation timestamp</li>
+<li>Triage conclusion: no evidence / suspicious / confirmed compromise</li>
+<li>Secret rotation performed (yes/no/not applicable)</li>
+</ul>
+<p>If those fields are empty, the ticket is not done. Metrics people can still count patches. IR people get the record they need when the same CVE shows up in threat intel two weeks later.</p>
+<h2>Checklist</h2>
+<ul>
+<li>Tag assets for internet exposure</li>
+<li>Wire KEV feed into vuln and IR tooling</li>
+<li>Define emergency patch path for public KEV + total control cases</li>
+<li>Require triage notes before closing those tickets</li>
+<li>Track time to exposure confirmation and time to verified remediation</li>
+<li>Align vuln management SLAs to risk classes instead of one flat CVSS cutoff</li>
+</ul>
+<p>Federal directives are not scripture for private networks. This one is a usable playbook. Steal it.</p>
+    <div class="sources"><h2>Sources</h2><ul><li><a href="https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk">CISA: BOD 26-04, prioritizing security updates based on risk</a></li>
+<li><a href="https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk">CISA: BOD 26-04 implementation guidance</a></li>
+<li><a href="https://www.cisa.gov/news-events/news/cisa-issues-new-directive-improving-how-federal-agencies-prioritize-mitigation-cyber-vulnerabilities">CISA: news release on the new directive</a></li>
+<li><a href="https://www.tenable.com/blog/cisa-bod-26-04-FAQ-vulnerability-remediation-impact">Tenable: CISA BOD 26-04 FAQ</a></li>
+<li><a href="https://www.securityweek.com/cisa-directs-federal-agencies-to-prioritize-security-patches-based-on-risk/">SecurityWeek: CISA directs federal agencies to prioritize security patches based on risk</a></li>
+<li><a href="https://www.paubox.com/blog/cisa-orders-agencies-to-patch-the-most-dangerous-flaws-within-three-days">Paubox: CISA orders agencies to patch the most dangerous flaws within three days</a></li></ul></div>
+    <div class="tags">Tags: trend, cisa, kev, vulnerability-management, ir</div>
+  </article>
+</body>
+</html>

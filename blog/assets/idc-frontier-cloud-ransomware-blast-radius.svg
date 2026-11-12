@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="IDCF Cloud: OSS flaw in the portal's authentication led to management console and virtualization admin rights; VMs and in-region data shared fate; only out of band backups helped.">
+  <rect width="720" height="320" fill="#ffffff"/>
+  <defs><marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5a5a5a"/></marker></defs>
+  <text x="360.0" y="34" text-anchor="middle" fill="#1a1a1a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-weight="600">Shared fate recovery (IDCF Cloud, East Japan Region 1)</text>
+  <rect x="20" y="55" width="500" height="220" rx="10" fill="#efe9df" stroke="#8a2e0b" stroke-width="2.5"/>
+  <text x="32" y="75" fill="#8a2e0b" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12" font-weight="600">Provider trust domain</text>
+  <rect x="40" y="90" width="140" height="70" rx="8" fill="#8a2e0b"/>
+  <text x="110.0" y="121.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Portal auth</text>
+  <text x="110.0" y="139.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">OSS vulnerability</text>
+  <rect x="200" y="90" width="140" height="70" rx="8" fill="#8a2e0b"/>
+  <text x="270.0" y="121.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Mgmt console</text>
+  <text x="270.0" y="139.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">admin rights taken</text>
+  <rect x="360" y="90" width="140" height="70" rx="8" fill="#5a1f0c"/>
+  <text x="430.0" y="121.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Virtualization</text>
+  <text x="430.0" y="139.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">platform admin</text>
+  <rect x="120" y="185" width="300" height="70" rx="8" fill="#5a1f0c"/>
+  <text x="270.0" y="216.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">495 customers' VMs</text>
+  <text x="270.0" y="234.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">encrypted, in-zone data hard to restore</text>
+  <line x1="180" y1="125" x2="198" y2="125" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="340" y1="125" x2="358" y2="125" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="430" y1="160" x2="380" y2="183" stroke="#5a5a5a" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="550" y="120" width="150" height="80" rx="8" fill="#0b3d2e"/>
+  <text x="625.0" y="147.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="13" font-weight="600">Your backup</text>
+  <text x="625.0" y="165.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">outside provider</text>
+  <text x="625.0" y="183.0" text-anchor="middle" fill="#f7f4ef" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="11">admin role</text>
+  <text x="360.0" y="300" text-anchor="middle" fill="#5a5a5a" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="12">IDC Frontier told customers to restore from their own backups.</text>
+</svg>
