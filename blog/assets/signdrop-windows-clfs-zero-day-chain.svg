@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="265" viewBox="0 0 720 265">
+<rect width="720" height="265" fill="#0d1019"/>
+<text x="20" y="30" font-family="sans-serif" font-size="20" font-weight="bold" fill="#e8fbff">SignDrop: standard user &#8594; SYSTEM via CLFS .cnpf redirect</text>
+<g font-family="sans-serif" font-size="14" fill="#8f9bb3">
+<rect x="20" y="60" width="200" height="110" rx="10" fill="#101420" stroke="#3df0ff" stroke-width="2"/>
+<text x="34" y="82" font-size="17" font-weight="bold" fill="#e8fbff">Standard user</text>
+<text x="34" y="105">Creates CLFS log with</text><text x="34" y="123">attacker-controlled</text><text x="34" y="141">container paths</text><text x="34" y="159">(.cnpf missing)</text>
+<rect x="260" y="60" width="200" height="110" rx="10" fill="#101420" stroke="#ffd166" stroke-width="2"/>
+<text x="274" y="82" font-size="17" font-weight="bold" fill="#e8fbff">Defender (SYSTEM)</text>
+<text x="274" y="105">Coerced via update</text><text x="274" y="123">interface opens the</text><text x="274" y="141">attacker&#8217;s log</text>
+<rect x="500" y="60" width="200" height="110" rx="10" fill="#101420" stroke="#ff2a3d" stroke-width="2"/>
+<text x="514" y="82" font-size="17" font-weight="bold" fill="#e8fbff">clfs.sys writes .cnpf</text>
+<text x="514" y="105">File created as SYSTEM,</text><text x="514" y="123">inherits log&#8217;s ACLs,</text><text x="514" y="141">redirected via symlink</text>
+<line x1="222" y1="115" x2="258" y2="115" stroke="#ff2bd6" stroke-width="3"/>
+<text x="206" y="100" fill="#ff2bd6">opens log</text>
+<line x1="462" y1="115" x2="498" y2="115" stroke="#ff2bd6" stroke-width="3"/>
+<text x="452" y="100" fill="#ff2bd6">create file</text>
+<text x="20" y="232">Result: SYSTEM-owned file writable by a standard user &#8594; SYSTEM shell</text>
+</g></svg>
