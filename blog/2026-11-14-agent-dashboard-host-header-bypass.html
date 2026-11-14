@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack | Black Belt Hacker</title>
+  <meta name="description" content="My private agent dashboard sat behind Cloudflare Access and still loaded from the server's raw IP with one forged Host header. The finding, the fix, and the loop that keeps an agent stack locked."/>
+  <link rel="canonical" href="https://blackbelthacker.com/blog/2026-11-14-agent-dashboard-host-header-bypass.html"/>
+  <meta property="og:title" content="One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack"/>
+  <meta property="og:description" content="My private agent dashboard sat behind Cloudflare Access and still loaded from the server's raw IP with one forged Host header. The finding, the fix, and the loop that keeps an agent stack locked."/>
+  <meta property="og:image" content="https://blackbelthacker.com/blog/assets/2026-11-14-agent-dashboard-host-header-bypass-header.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --accent: #0b3d2e;
+  --line: #cfc8bb;
+  --card: #ffffff;
+  --warn: #8a2e0b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+.brand {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+.meta {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.diagram figcaption {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.diagram img, .diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  margin-top: 2rem;
+}
+h3 {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+}
+p, li { font-size: 1.05rem; }
+a { color: var(--accent); }
+code {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 0.92em;
+  background: #efeae2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: #1f2421;
+  color: #f3f0ea;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+ul, ol { padding-left: 1.3rem; }
+.tags {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+.sources li { margin-bottom: 0.35rem; }
+.note {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  color: var(--warn);
+  margin-bottom: 1.25rem;
+}
+.lead { margin: 0 0 1.5rem; }
+.lead img { width: 100%; height: auto; display: block; border-radius: 8px; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121412;
+    --ink: #f2eee6;
+    --muted: #b0aaa0;
+    --accent: #7dccb0;
+    --line: #2c332e;
+    --card: #1a1f1c;
+    --warn: #e0a48a;
+  }
+  code { background: #2a312c; }
+}
+
+.site-nav {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+.site-nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <article class="wrap">
+<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
+
+    <div class="brand">Black Belt Hacker</div>
+    <h1>One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack</h1>
+    <div class="meta">2026-11-14 · hardening, ai-agents, cloudflare, reverse-proxy, detection, self-hosted</div>
+    <figure class="lead"><img src="assets/2026-11-14-agent-dashboard-host-header-bypass-header.jpg" alt="A glowing green padlock in a dark server corridor, with a thin beam of light slipping through a side door left ajar." width="1600" height="905"/></figure>
+
+    <p>I run a boss agent that coordinates a handful of workers. They write, research, build and report back to me on Telegram. They live on a cloud VM with API keys, a shell, a git remote and a kanban board my family uses every day.</p>
+    <p>That is a remote shell with a credit card attached. So I did what I would do for any new system at work: I stopped building for a weekend and audited it like an attacker who already had a foothold.</p>
+    <p>It was worse than I expected, and the worst finding was not where I was looking.</p>
+    <h2>The setup</h2>
+    <p>Two VMs on GCP. One runs the agents under PM2 with a dashboard on port 443. The other runs Caddy, which serves my public site and reverse proxies the kanban app sitting on <code>127.0.0.1:5051</code>. DNS and edge are on Cloudflare.</p>
+    <p>On paper it looked reasonable. In practice, both VMs had firewall rules allowing <code>0.0.0.0/0</code> on 80 and 443, and the agent dashboard answered on a public IP.</p>
+    <p>First fix was the obvious one. I moved both private hostnames behind a Cloudflare Tunnel with an Access policy that allows exactly one email. The VM&rsquo;s cloudflared dials out, so nothing needs to listen publicly. I opened the dashboard in a private window, got the Access login page, and felt good about it.</p>
+    <p>Then I tested the thing I always tell other teams to test.</p>
+    <h2>The finding: one header away</h2>
+    <p>The kanban app still sat behind Caddy on a VM with a public IP, because that same Caddy serves my public site. Caddy picks a site block by hostname. So I skipped Cloudflare entirely and asked the VM directly, pretending to be the private hostname:</p>
+    <pre><code>curl -sk --resolve kanban.example.com:443:&lt;VM_PUBLIC_IP&gt; https://kanban.example.com/</code></pre>
+    <p>It returned the board. No Access prompt, no login, nothing. Every request through the front door was protected. The side door was wide open, and it only needed one forged Host header.</p>
+    <p>This pattern is common anywhere one reverse proxy serves both public and private sites: the identity gate lives at the edge, but the origin will still answer anyone who knows the right name. Scanners do not need your DNS. They hit IPs and try hostnames from certificate transparency logs.</p>
+    <p>The fix took five minutes. The private site block now refuses anything that did not come from the tunnel connector&rsquo;s internal address:</p>
+    <pre><code>kanban.example.com {
+    @notTunnel not remote_ip &lt;CONNECTOR_INTERNAL_IP&gt;
+    abort @notTunnel
+    reverse_proxy 127.0.0.1:5051
+}</code></pre>
+    <p>I also rebound the app to localhost only. Both bypass tests now fail, and the board still loads through Access. Then I pulled 30 days of Caddy logs to see whether anyone had found the side door before I did. After an exposure, that is the question that matters.</p>
+    <h2>The near miss I did not see coming</h2>
+    <p>My agent harness is open source. I had cloned it, and my VM had 17 local commits on top of upstream: my agents, my status files, my notes on costs and infrastructure.</p>
+    <p>While moving everything into a private repo, my AI coding assistant hit a push error and helpfully suggested a fix: add a deploy key with write access to the origin repo. The origin was the public upstream project. I do not own it, and one more push would have published my operating notes to everyone who watches that repo.</p>
+    <p>Nothing malicious happened. The assistant was solving the problem in front of it. That is exactly the risk: agents optimize for &ldquo;make the error go away,&rdquo; and they will cheerfully take the shortest path through your security boundary.</p>
+    <p>The fix is boring and permanent:</p>
+    <pre><code>git remote rename origin upstream
+git remote set-url --push upstream DISABLED
+git remote add origin git@github.com:&lt;you&gt;/&lt;private-repo&gt;.git</code></pre>
+    <p>Now a push to upstream fails by design, and each private repo gets its own deploy key scoped to that one repo.</p>
+    <h2>The rest of the list</h2>
+    <p>Once I started looking, the gaps stacked up fast:</p>
+    <ul>
+      <li><strong>Keys everywhere.</strong> API keys and bot tokens lived in <code>.env</code> files any agent with file tools could read and print.</li>
+      <li><strong>No spend caps.</strong> Model keys had no limits. A stuck retry loop on a top tier model can burn a month of budget overnight, and a cloud budget only sends an email. It never stops anything.</li>
+      <li><strong>Chat as a control plane.</strong> My boss agent takes orders from Telegram. Bot usernames are public. If the bot does not check the sender&rsquo;s user ID, anyone who finds it can give it commands.</li>
+      <li><strong>Read plus act.</strong> Agents that read web pages or email could also run shell commands. That is the prompt injection kill chain: untrusted text in, privileged action out.</li>
+    </ul>
+    <h2>What fixed it</h2>
+    <p>The principle is simple: <strong>the VM accepts nothing from the internet.</strong> Every connection starts from inside it.</p>
+    <figure class="diagram">
+      <img src="assets/2026-11-14-agent-dashboard-host-header-bypass.png" alt="Reference architecture: browser to Cloudflare Access to tunnel, cloudflared dials out from the VM, dashboards on 127.0.0.1, agents call APIs outbound only." width="1344" height="762"/>
+      <figcaption>Nothing reaches the VM without passing Cloudflare Access.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Outbound only.</strong> cloudflared dials out to Cloudflare. Telegram is polled, not pushed. With both, no firewall rule needs to open a port to the world.</li>
+      <li><strong>Identity at the edge, verification at the origin.</strong> Access in front of every private hostname, and the origin refuses anything that did not come through the connector. A misconfigured route now fails closed.</li>
+      <li><strong>Secrets agents cannot read as text.</strong> Keys move to a secret manager. Better still, where a provider supports workload identity, there is no key to steal at all.</li>
+      <li><strong>Caps on everything that meters.</strong> Every model key gets a spend limit. The cloud budget alert feeds a small function that actually stops tagged VMs. A budget that only emails you is a receipt, not a control.</li>
+      <li><strong>Split reading from acting.</strong> Agents that touch untrusted content cannot send, post, spend or run a shell without a human approval in between.</li>
+      <li><strong>Bots obey one user ID.</strong> Anything else gets ignored.</li>
+    </ul>
+    <h2>Hardening is a loop, not a weekend</h2>
+    <p>A checklist goes stale the day you finish it. New CVEs land daily in the harness, the model SDKs, npm and PyPI packages, MCP servers and the OS under all of it. Agent tooling is a supply chain target now.</p>
+    <p>So I gave the problem to an agent with tight limits. Every morning a security agent:</p>
+    <ol>
+      <li>Builds an inventory of everything the agents run (<code>syft</code>, plus the OS package list).</li>
+      <li>Scans it against known vulnerabilities (<code>osv-scanner</code>, <code>npm audit</code>, <code>pip-audit</code>).</li>
+      <li>Checks the CISA Known Exploited Vulnerabilities catalog and the advisories for every repo I depend on.</li>
+      <li>Treats anything actively exploited, or reachable from outside content, as urgent and messages me the same day.</li>
+      <li>Patches on a branch, tests, and waits for my approval before merging.</li>
+    </ol>
+    <p>Every week it re-runs the entire checklist to catch drift: a port that reopened, a key without a cap, a permission that grew.</p>
+    <p>It is allowed to improve itself, with two limits. It can add checks and tighten rules, but it can never remove a guardrail or widen its own permissions. And it cannot edit its own instructions. Another agent proposes those changes, and I approve them. A self improving agent without that rule is also a self weakening one.</p>
+    <h2>Checklist</h2>
+    <p>Run these before you close this tab:</p>
+    <ol>
+      <li><strong>Raw IP test.</strong> <code>curl -sk --resolve &lt;private-host&gt;:443:&lt;VM_IP&gt; https://&lt;private-host&gt;/</code> must fail.</li>
+      <li><strong>Open ports.</strong> <code>gcloud compute firewall-rules list</code> (or your cloud&rsquo;s equivalent) shows nothing open to <code>0.0.0.0/0</code> that is not meant to be public.</li>
+      <li><strong>Dashboards on localhost.</strong> <code>ss -tlnp</code> shows them bound to <code>127.0.0.1</code>, not <code>0.0.0.0</code>.</li>
+      <li><strong>Login gate.</strong> Open each private URL in a private window. You get a login page, not your app.</li>
+      <li><strong>Secrets in git.</strong> Run a secret scanner across your full history, not just the current tree.</li>
+      <li><strong>Spend caps.</strong> Every model API key has a monthly limit set in the provider console.</li>
+      <li><strong>Bot allowlist.</strong> Message your bot from a second account. Nothing happens.</li>
+      <li><strong>No public push.</strong> <code>git remote -v</code> shows any upstream you do not own with its push URL set to <code>DISABLED</code>.</li>
+      <li><strong>Agents as non root.</strong> <code>ps -o user= -p &lt;pid&gt;</code> shows a service user with no sudo.</li>
+      <li><strong>A heartbeat.</strong> Something messages your phone when an agent dies or the disk fills. Silent failures look like quiet days.</li>
+    </ol>
+    <h2>Briefing line for leadership</h2>
+    <p>An identity gate at the edge is not a control if the origin still answers the internet. Verify at the origin, and test the side door, not just the front door.</p>
+    <h2>The full kit</h2>
+    <p>Those ten are the start. The full field kit has 64 checks across secrets, network exposure, chat surfaces, prompt injection, MCP servers, cost runaway, logging, backups and supply chain, each with the exact command to verify it, plus the continuous hardening loop, real configs, and a 30 minute incident playbook.</p>
+    <p><strong>The Agent Hardening Kit:</strong> <a href="https://blackbelthacker.gumroad.com/l/qizknf" rel="noopener">https://blackbelthacker.gumroad.com/l/qizknf</a></p>
+    <p>Free updates as the threats change. If you find a gap I missed, tell me.</p>
+    <div class="tags">Tags: hardening, ai-agents, cloudflare, reverse-proxy, detection, self-hosted</div>
+  </article>
+</body>
+</html>
