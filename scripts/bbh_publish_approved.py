@@ -22,7 +22,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 QUEUE = ROOT / "content" / "blog" / "queue"
 PUBLISHED = ROOT / "content" / "blog" / "published"
-SITE_BLOG = ROOT / "sites" / "blackbelthacker.com" / "blog"
+SITE = ROOT / "sites" / "blackbelthacker.com"
+SITE_BLOG = SITE / "blog"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from layout import apply_document, write_sitemap  # noqa: E402
 PROGRESS = ROOT / "agents" / "bbh-news" / "PROGRESS.md"
 
 PROJECT = "thomsen-kanban-2611"
@@ -182,7 +185,7 @@ def deploy(slug_html: str) -> None:
         ],
         check=True,
     )
-    print(f"deployed: https://blackbelthacker.com/blog/{slug_html}")
+    print(f"deployed: https://www.blackbelthacker.com/blog/{slug_html}")
 
 
 def write_medium_card(pack: Path, canonical: str, title: str) -> None:
@@ -259,6 +262,9 @@ def main() -> int:
                 shutil.copy2(asset, dest_assets / asset.name)
 
     rebuild_index()
+    apply_document(dest_html, SITE)
+    apply_document(SITE_BLOG / "index.html", SITE)
+    write_sitemap(SITE)
     title_m = re.search(
         r"<h1>(.*?)</h1>", dest_html.read_text(encoding="utf-8"), re.S
     )
@@ -267,7 +273,7 @@ def main() -> int:
         if title_m
         else slug
     )
-    canonical = f"https://blackbelthacker.com/blog/{slug}.html"
+    canonical = f"https://www.blackbelthacker.com/blog/{slug}.html"
     write_medium_card(pack, canonical, title)
     commit_and_push(slug, title)
 

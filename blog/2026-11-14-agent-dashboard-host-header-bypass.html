@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack | Black Belt Hacker</title>
   <meta name="description" content="My private agent dashboard sat behind Cloudflare Access and still loaded from the server's raw IP with one forged Host header. The finding, the fix, and the loop that keeps an agent stack locked."/>
-  <link rel="canonical" href="https://blackbelthacker.com/blog/2026-11-14-agent-dashboard-host-header-bypass.html"/>
-  <meta property="og:title" content="One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack"/>
-  <meta property="og:description" content="My private agent dashboard sat behind Cloudflare Access and still loaded from the server's raw IP with one forged Host header. The finding, the fix, and the loop that keeps an agent stack locked."/>
-  <meta property="og:image" content="https://blackbelthacker.com/blog/assets/2026-11-14-agent-dashboard-host-header-bypass-header.jpg"/>
+  <link rel="canonical" href="https://www.blackbelthacker.com/blog/2026-11-14-agent-dashboard-host-header-bypass.html">
+  <meta property="og:title" content="One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack | Black Belt Hacker">
+  <meta property="og:description" content="My private agent dashboard sat behind Cloudflare Access and still loaded from the server&#x27;s raw IP with one forged Host header. The finding, the fix, and the loop that keeps an agent stack locked.">
+  <meta property="og:image" content="https://www.blackbelthacker.com/blog/assets/2026-11-14-agent-dashboard-host-header-bypass-header.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <style>
 :root {
@@ -138,16 +138,31 @@ ul, ol { padding-left: 1.3rem; }
   margin-bottom: 1.25rem;
 }
 .site-nav a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
-.site-nav a:hover { text-decoration: underline; }
+.site-nav a:hover, .site-nav a:focus-visible { text-decoration: underline; }
 </style>
+  <meta property="og:site_name" content="Black Belt Hacker">
+  <meta property="og:url" content="https://www.blackbelthacker.com/blog/2026-11-14-agent-dashboard-host-header-bypass.html">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/site.css">
 </head>
 <body>
+<!-- site-header -->
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">Black Belt Hacker</a>
+    <nav aria-label="Site">
+      <a href="/products/">Products</a>
+      <a href="/services/">Services</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</header>
+<!-- /site-header -->
   <article class="wrap">
-<nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
-
-    <div class="brand">Black Belt Hacker</div>
+<div class="brand">Black Belt Hacker</div>
     <h1>One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack</h1>
-    <div class="meta">2026-11-14 · hardening, ai-agents, cloudflare, reverse-proxy, detection, self-hosted</div>
+    <div class="meta">2026-11-14 · hardening, ai-agents, cloudflare, reverse-proxy, detection, self hosted</div>
     <figure class="lead"><img src="assets/2026-11-14-agent-dashboard-host-header-bypass-header.jpg" alt="A glowing green padlock in a dark server corridor, with a thin beam of light slipping through a side door left ajar." width="1600" height="905"/></figure>
 
     <p>I run a boss agent that coordinates a handful of workers. They write, research, build and report back to me on Telegram. They live on a cloud VM with API keys, a shell, a git remote and a kanban board my family uses every day.</p>
@@ -233,7 +248,22 @@ git remote add origin git@github.com:&lt;you&gt;/&lt;private-repo&gt;.git</code>
     <p>Those ten are the start. The full field kit has 64 checks across secrets, network exposure, chat surfaces, prompt injection, MCP servers, cost runaway, logging, backups and supply chain, each with the exact command to verify it, plus the continuous hardening loop, real configs, and a 30 minute incident playbook.</p>
     <p><strong>The Agent Hardening Kit:</strong> <a href="https://blackbelthacker.gumroad.com/l/qizknf" rel="noopener">https://blackbelthacker.gumroad.com/l/qizknf</a></p>
     <p>Free updates as the threats change. If you find a gap I missed, tell me.</p>
-    <div class="tags">Tags: hardening, ai-agents, cloudflare, reverse-proxy, detection, self-hosted</div>
+    <div class="tags">Tags: hardening, ai-agents, cloudflare, reverse-proxy, detection, self hosted</div>
   </article>
+<!-- site-footer -->
+<footer class="site-footer">
+  <div class="inner">
+    <nav aria-label="Footer">
+      <a href="mailto:n0auth@blackbelthacker.com">n0auth@blackbelthacker.com</a>
+      <a href="https://www.instagram.com/blackbelthacker/">Instagram</a>
+      <a href="https://medium.com/@n0auth">Medium</a>
+      <a href="/refund/">Refund Policy</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+    <p>© 2026 Black Belt Hacker</p>
+  </div>
+</footer>
+<!-- /site-footer -->
 </body>
 </html>

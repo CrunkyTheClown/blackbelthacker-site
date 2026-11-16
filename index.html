@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Black Belt Hacker</title>
-  <meta name="description" content="Family planning tools and personal technology projects.">
+  <meta name="description" content="Defender first cybersecurity from an OSCP and BJJ black belt. Agent security kits, penetration testing, and field notes for SOC and security teams.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#07080f">
   <link rel="icon" type="image/png" href="favicon.png">
@@ -60,6 +60,15 @@
       border-radius: 16px;
       box-shadow: 0 0 0 1px var(--line), 0 0 40px rgba(61, 240, 255, 0.12), 0 0 80px rgba(255, 43, 214, 0.08);
     }
+    .site-nav { text-align: center; margin: 0 0 20px; }
+    .site-nav a {
+      color: var(--cyan);
+      text-decoration: none;
+      margin: 0 0.6rem;
+      font: 13px/1.4 ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+    }
+    .site-nav a:hover, .site-nav a:focus-visible { text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
     .sr-only {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
@@ -117,21 +126,51 @@
       * { transition: none !important; }
     }
   </style>
+  <link rel="canonical" href="https://www.blackbelthacker.com/">
+  <meta property="og:site_name" content="Black Belt Hacker">
+  <meta property="og:title" content="Black Belt Hacker">
+  <meta property="og:description" content="Defender first cybersecurity from an OSCP and BJJ black belt. Agent security kits, penetration testing, and field notes for SOC and security teams.">
+  <meta property="og:url" content="https://www.blackbelthacker.com/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Black Belt Hacker", "url": "https://www.blackbelthacker.com/", "logo": "https://www.blackbelthacker.com/logo-square.png", "email": "n0auth@blackbelthacker.com", "sameAs": ["https://www.instagram.com/blackbelthacker/", "https://medium.com/@n0auth"]}</script>
 </head>
 <body>
-  <main>
-    <div class="hero">
+<!-- site-header -->
+<header class="site-header">
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="inner">
+    <a class="brand" href="/">Black Belt Hacker</a>
+    <nav aria-label="Site">
+      <a href="/products/">Products</a>
+      <a href="/services/">Services</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</header>
+<!-- /site-header -->
+  <main id="content">
+<div class="hero">
       <picture>
         <source srcset="logo-glitch.gif" media="(prefers-reduced-motion: no-preference)">
         <img src="logo-square.png" width="600" height="600" alt="Black Belt Hacker logo: a black belt with a red tip tied around a neon circuit hexagon, with a terminal prompt in the knot">
       </picture>
       <h1 class="sr-only">Black Belt Hacker</h1>
     </div>
-    <p class="lede">Cybersecurity notes, family tools, and personal technology projects.</p>
+    <p class="lede">Defender first cybersecurity. Agent security kits, penetration testing, and field notes for SOC and security teams.</p>
     <div class="belt" aria-hidden="true"></div>
 
     <h2>About</h2>
-    <p>This domain hosts defender-first security writing, plus a few small private tools I build and run for my household. There is nothing to download here, no ads and no tracking.</p>
+    <p>I am an OSCP with over 20 years in enterprise security and a BJJ black belt. This site is defender first writing, plus the agent security kits I sell on Gumroad. There are no ads and no tracking.</p>
+
+    <h2 style="margin-top:32px">Products</h2>
+    <ul class="links">
+      <li>
+        <a href="/products/">Black Belt Sentinel and the Agent Hardening Kit</a>
+        <span>Sentinel is $29 early access and includes the kit. The checklist alone is $19.</span>
+      </li>
+    </ul>
 
     <h2 style="margin-top:32px">Writing</h2>
     <ul class="links">
@@ -141,17 +180,23 @@
       </li>
     </ul>
 
-    <h2 style="margin-top:32px">Projects</h2>
-    <ul class="links">
-      <li>
-        <a href="https://kanban.blackbelthacker.com">Family planner</a>
-        <span>A private task board for our household. Sign-in required (family only).</span>
-      </li>
-    </ul>
-
     <h2>Contact</h2>
-    <p>For questions about this site, use the contact details on my public profiles.</p>
+    <p>Email <a href="mailto:n0auth@blackbelthacker.com">n0auth@blackbelthacker.com</a>.</p>
   </main>
-  <footer>© 2026 blackbelthacker.com</footer>
+<!-- site-footer -->
+<footer class="site-footer">
+  <div class="inner">
+    <nav aria-label="Footer">
+      <a href="mailto:n0auth@blackbelthacker.com">n0auth@blackbelthacker.com</a>
+      <a href="https://www.instagram.com/blackbelthacker/">Instagram</a>
+      <a href="https://medium.com/@n0auth">Medium</a>
+      <a href="/legal/refund/">Refund Policy</a>
+      <a href="/legal/privacy/">Privacy</a>
+      <a href="/legal/terms/">Terms</a>
+    </nav>
+    <p>© 2026 Black Belt Hacker</p>
+  </div>
+</footer>
+<!-- /site-footer -->
 </body>
 </html>

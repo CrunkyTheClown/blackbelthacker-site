@@ -48,7 +48,7 @@
       margin-right: 1rem;
       font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace;
     }
-    .site-nav a:hover { text-decoration: underline; }
+    .site-nav a:hover, .site-nav a:focus-visible { text-decoration: underline; }
     h1 {
       font: 700 28px/1.2 system-ui, sans-serif;
       margin: 1rem 0 0.5rem;
@@ -92,16 +92,35 @@
       border-top: 1px solid var(--line);
     }
   </style>
+  <link rel="canonical" href="https://www.blackbelthacker.com/blog/">
+  <meta property="og:site_name" content="Black Belt Hacker">
+  <meta property="og:title" content="Blog · Black Belt Hacker">
+  <meta property="og:description" content="Defender-first notes on CVEs, KEVs, incidents, and response order.">
+  <meta property="og:url" content="https://www.blackbelthacker.com/blog/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/site.css">
 </head>
 <body>
+<!-- site-header -->
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">Black Belt Hacker</a>
+    <nav aria-label="Site">
+      <a href="/products/">Products</a>
+      <a href="/services/">Services</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+    </nav>
+  </div>
+</header>
+<!-- /site-header -->
   <main>
-    <nav class="site-nav" aria-label="Site"><a href="/">Home</a><a href="/blog/">Blog</a></nav>
-    <h1>Blog</h1>
+<h1>Blog</h1>
     <p class="lede">Defender-first notes on KEVs, incidents, and response order.</p>
     <div class="belt" aria-hidden="true"></div>
     <ul class="posts">
       <li><a href="2026-11-14-friday-the-13th-faa-ground-stop.html">Friday the 13th Grounded America. By Midnight, Washington Sent a $50 Billion Ransom Note.</a><span>2026-11-14 · trend, aviation, resilience, single-point-of-failure, incident-response, opinion</span></li>
-      <li><a href="2026-11-14-agent-dashboard-host-header-bypass.html">One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack</a><span>2026-11-14 · hardening, ai-agents, cloudflare, reverse-proxy, detection, self-hosted</span></li>
+      <li><a href="2026-11-14-agent-dashboard-host-header-bypass.html">One Header Bypassed My Login: Hardening a Self Hosted AI Agent Stack</a><span>2026-11-14 · hardening, ai-agents, cloudflare, reverse-proxy, detection, self hosted</span></li>
       <li><a href="2026-11-12-signdrop-windows-clfs-zero-day.html">Windows Zero-Day SignDrop Turns a Standard User Into SYSTEM, and Microsoft Has Not Patched It</a><span>2026-11-12 · windows, zero-day, lpe, clfs, edr, detection</span></li>
       <li><a href="2026-11-11-maersk-confirms-data-breach-as-whitearmor-ransomware-demands-5-million.html">Maersk Confirms a Data Breach as WhiteArmor Demands $5 Million</a><span>2026-11-11 · cybersecurity, ransomware, logistics, incident-response</span></li>
       <li><a href="2026-11-11-barracuda-esg-auth-bypass-command-injection-chain.html">Barracuda ESG Auth Bypass and Command Injection Are One Incident</a><span>2026-11-11 · cve, barracuda, kev, email-security, detection</span></li>
@@ -116,6 +135,20 @@
       <li><a href="2026-11-02-teams-external-chat-fake-it-support.html">Fake IT Support Scams Are Abusing Microsoft Teams Chat</a><span>2026-11-02 · trend, microsoft-teams, social-engineering, ransomware, detection</span></li>
     </ul>
   </main>
-  <footer>© 2026 blackbelthacker.com</footer>
+<!-- site-footer -->
+<footer class="site-footer">
+  <div class="inner">
+    <nav aria-label="Footer">
+      <a href="mailto:n0auth@blackbelthacker.com">n0auth@blackbelthacker.com</a>
+      <a href="https://www.instagram.com/blackbelthacker/">Instagram</a>
+      <a href="https://medium.com/@n0auth">Medium</a>
+      <a href="/refund/">Refund Policy</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+    <p>© 2026 Black Belt Hacker</p>
+  </div>
+</footer>
+<!-- /site-footer -->
 </body>
 </html>

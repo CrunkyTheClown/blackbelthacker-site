@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blackbelthacker.com/sitemap.xml
+Sitemap: https://www.blackbelthacker.com/sitemap.xml

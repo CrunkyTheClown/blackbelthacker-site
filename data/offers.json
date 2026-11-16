@@ -1,0 +1,272 @@
+{
+  "_readme": "PLACEHOLDER. Paste the real Cal.com URL over CAL_BJJ_URL. Prices below are display only.",
+  "placeholders": {
+    "CAL_PENTEST_URL": "https://cal.com/blackbelthacker/pentest-scoping",
+    "CAL_BJJ_URL": "https://cal.com/REPLACE/bjj-private"
+  },
+  "support_email": "n0auth@blackbelthacker.com",
+  "og_default": "/images/og-default.webp",
+  "offers": [
+    {
+      "id": "kit",
+      "kind": "product",
+      "name": "Agent Hardening Kit",
+      "tagline": "The security checklist for self hosted AI agents. 76 checks, mapped to OWASP 2026, with a command for every one.",
+      "price_label": "$19",
+      "price_usd": 19,
+      "bullets": ["76 checks", "Mapped to OWASP 2026", "A command for every check"],
+      "cta_label": "Get it on Gumroad",
+      "cta_url": "https://blackbelthacker.gumroad.com/l/qizknf",
+      "status": "live",
+      "image": "/products/kit-cover.webp",
+      "image_alt": "Agent Hardening Kit cover: the title over a dark server room, with a green prompt that reads harden agents.",
+      "image_width": 1280,
+      "image_height": 720
+    },
+    {
+      "id": "sentinel",
+      "kind": "product",
+      "name": "Black Belt Sentinel",
+      "tagline": "A read only AI security auditor for your agent stack. 76 checks, free SIEM, IDS, honeytokens and threat intel, coached belt by belt.",
+      "price_label": "$29",
+      "price_usd": 29,
+      "bullets": ["76 checks on a stack you run", "Free SIEM, IDS, honeytokens, and threat intel", "Coached from white belt to black belt"],
+      "cta_label": "Get it on Gumroad",
+      "cta_url": "https://blackbelthacker.gumroad.com/l/aqnvrn",
+      "status": "early_access",
+      "includes_kit": true,
+      "image": "/products/sentinel-cover.webp",
+      "image_alt": "Black Belt Sentinel cover: a person in a black gi at a desk in a dark server aisle, facing a monitor outlined in red.",
+      "image_width": 1024,
+      "image_height": 576
+    },
+    {
+      "id": "pentest",
+      "kind": "service",
+      "name": "Penetration Testing",
+      "tagline": "External, web, API, agent, and internal tests. Scoped in writing before any packet is sent.",
+      "price_label": "Quote after scoping",
+      "bullets": ["Five belt tiers", "Written authorization first", "Report, readout, and a free retest"],
+      "cta_label": "Book a scoping call",
+      "cta_url": "CAL_PENTEST_URL",
+      "booking_url": "CAL_PENTEST_URL",
+      "status": "live",
+      "image": "/images/services/pentest-hero.webp",
+      "image_alt": "A martial artist in a black gi, seen from behind, working at a desk in a dark server aisle.",
+      "image_width": 1920,
+      "image_height": 1080
+    },
+    {
+      "id": "bjj",
+      "kind": "service",
+      "name": "BJJ Private Lessons",
+      "tagline": "American Top Team Atlanta",
+      "price_label": "",
+      "bullets": ["Private lessons", "American Top Team Atlanta"],
+      "cta_label": "Book a lesson",
+      "cta_url": "CAL_BJJ_URL",
+      "status": "live",
+      "image": ""
+    },
+    {
+      "id": "course",
+      "kind": "service",
+      "name": "Belt Path Security Course",
+      "tagline": "A belt path for defender first security. Not open yet.",
+      "price_label": "",
+      "bullets": ["Waitlist only", "No seat is for sale yet"],
+      "cta_label": "Join the waitlist",
+      "cta_url": "mailto:n0auth@blackbelthacker.com?subject=Course%20waitlist",
+      "status": "coming_soon",
+      "image": ""
+    }
+  ],
+  "products_hero": {
+    "line": "Defender first kits for a self hosted agent stack.",
+    "sub": "Run the checklist yourself, or let Sentinel run the checks and coach the fixes.",
+    "image": "/images/products/products-hero.webp",
+    "image_alt": "A black belt on a matte black desk beside a closed laptop and a small server.",
+    "image_width": 1920,
+    "image_height": 1080
+  },
+  "services_hero": {
+    "line": "Services for defenders, and private BJJ lessons.",
+    "sub": "Book a scoping call, book a lesson, or join the course waitlist."
+  },
+  "comparison": {
+    "caption": "Which one do I need?",
+    "columns": ["Agent Hardening Kit", "Black Belt Sentinel"],
+    "rows": [
+      {
+        "label": "What you get",
+        "cells": [
+          "The checklist and commands you run yourself",
+          "The kit plus an auditor agent that runs the checks, SIEM, IDS, honeytokens, threat intel, and belt coaching"
+        ]
+      },
+      {
+        "label": "Includes the Kit",
+        "cells": ["This is the kit", "Includes the Kit"]
+      }
+    ]
+  },
+  "gallery": [
+    {
+      "src": "/products/dashboard-hero.webp",
+      "width": 1024,
+      "height": 576,
+      "alt": "Black Belt Sentinel dashboard showing a green belt score of 68 out of 76, open findings, and SOC health.",
+      "caption": "Sentinel daily score, findings, and SOC health."
+    },
+    {
+      "src": "/products/belt-roadmap.webp",
+      "width": 1280,
+      "height": 720,
+      "alt": "Belt roadmap from white to black: quick start, hardened, Sentinel online, SOC, detection, threat intel, drills, and continuous improvement.",
+      "caption": "One technique at a time, white belt to black belt."
+    }
+  ],
+  "assurance": [
+    "Delivery: a Gumroad download. The kit is the checklist and the commands. Sentinel adds the auditor agent.",
+    "Refund: 14 days, no questions asked, for Gumroad products.",
+    "Updates: free as the checks change.",
+    "Support: n0auth@blackbelthacker.com"
+  ],
+  "tiers": [
+    {
+      "id": "white",
+      "belt": "White Belt",
+      "name": "External Exposure Review",
+      "best_for": "A first look at what the internet can already see.",
+      "what_i_test": "Internet facing attack surface, DNS, exposed services, and a leaked credentials check.",
+      "duration": "A few days",
+      "price_label": "Quote after scoping"
+    },
+    {
+      "id": "blue",
+      "belt": "Blue Belt",
+      "name": "External Network Penetration Test",
+      "best_for": "Networks with hosts exposed beyond a website.",
+      "what_i_test": "Hosts and services reachable from the internet, inside the signed scope.",
+      "duration": "About one week",
+      "price_label": "Quote after scoping",
+      "image": "/images/services/external-network.webp",
+      "image_alt": "A dark city at night, its streets drawn as network cables leading to one fortified building.",
+      "image_width": 1200,
+      "image_height": 900
+    },
+    {
+      "id": "purple",
+      "belt": "Purple Belt",
+      "name": "Web Application and API Penetration Test",
+      "best_for": "Teams shipping a web app or an API.",
+      "what_i_test": "The application and its API, mapped to OWASP WSTG and the OWASP API Top 10.",
+      "duration": "One to two weeks",
+      "price_label": "Quote after scoping",
+      "image": "/images/services/web-app.webp",
+      "image_alt": "A black belt knot reflecting a dark laptop, with glass panels of abstract application windows.",
+      "image_width": 1200,
+      "image_height": 900
+    },
+    {
+      "id": "brown",
+      "belt": "Brown Belt",
+      "name": "AI Agent and LLM Application Assessment",
+      "badge": "Signature",
+      "best_for": "Teams running agents, tools, or LLM features.",
+      "what_i_test": "Prompt injection, tool abuse, secret leakage, and excessive agency. Mapped to the OWASP LLM Top 10 and the OWASP Top 10 for Agentic Applications.",
+      "duration": "One to two weeks",
+      "price_label": "Quote after scoping",
+      "image": "/images/services/ai-agent-assessment.webp",
+      "image_alt": "A translucent circuit figure seated cross legged on a dark mat, red glow in the chest, with server racks behind it.",
+      "image_width": 1200,
+      "image_height": 900
+    },
+    {
+      "id": "black",
+      "belt": "Black Belt",
+      "name": "Assumed Breach / Internal Network Test",
+      "best_for": "A test that starts from inside the network.",
+      "what_i_test": "Custom scope. An internal test that starts from an assumed breach, agreed in writing before testing starts.",
+      "duration": "Set in the signed scope",
+      "price_label": "Quote after scoping"
+    }
+  ],
+  "pentest_hero": {
+    "line": "Penetration testing from an OSCP who has spent 20 years on the defending side.",
+    "sub": "I test like an attacker and report like a defender: findings your team can fix, ranked by real risk.",
+    "image": "/images/services/pentest-hero.webp",
+    "image_alt": "A martial artist in a black gi, seen from behind, working at a desk in a dark server aisle.",
+    "image_width": 1920,
+    "image_height": 1080
+  },
+  "steps": [
+    "Scoping call",
+    "Mutual NDA",
+    "Scope and Rules of Engagement signed",
+    "Statement of Work and deposit",
+    "Testing in agreed windows",
+    "Report and readout call",
+    "Free retest of fixed findings within 30 days"
+  ],
+  "deliverables": [
+    "Executive summary",
+    "Technical findings with evidence and reproduction steps",
+    "CVSS v4.0 scores",
+    "Prioritised fix list",
+    "Readout call",
+    "Retest letter"
+  ],
+  "rules": [
+    "Written authorization before any packet is sent.",
+    "Testing only inside the signed scope and windows.",
+    "No denial of service or social engineering unless explicitly in scope.",
+    "Findings and data are encrypted and destroyed after the retention period.",
+    "Critical findings are reported immediately, not held for the report."
+  ],
+  "documents": [
+    {
+      "name": "Mutual NDA",
+      "summary": "Both sides keep engagement information confidential.",
+      "pdf": "/legal/bbh-mutual-nda-template.pdf"
+    },
+    {
+      "name": "Statement of Work",
+      "summary": "The work, the price, and the delivery terms.",
+      "pdf": "/legal/bbh-sow-template.pdf"
+    },
+    {
+      "name": "Scope and Rules of Engagement Authorization",
+      "summary": "Written permission for the systems, the windows, and the methods.",
+      "pdf": "/legal/bbh-scope-roe-authorization-template.pdf"
+    }
+  ],
+  "documents_note": "Templates are shown for transparency. Final documents are tailored to each engagement.",
+  "documents_missing_label": "Sent after your scoping call",
+  "faqs": [
+    {
+      "q": "Do you need access to production?",
+      "a": "Sometimes. External tests often need no credentials. Authenticated and internal tests need access you control, shared after the NDA, and only for the systems in the signed scope."
+    },
+    {
+      "q": "How do you avoid breaking things?",
+      "a": "Testing stays inside the signed windows. I do not run denial of service. Destructive checks stay out unless the scope includes them. On production I stay on the rate and the paths we agreed."
+    },
+    {
+      "q": "Who sees the report?",
+      "a": "You, and the people you name. I do not publish findings from an engagement. The report is encrypted, and the data is destroyed after the retention period in the contract."
+    },
+    {
+      "q": "Do you test cloud hosted systems?",
+      "a": "Yes, within the cloud provider's testing policy. You confirm that policy before testing starts."
+    },
+    {
+      "q": "Can you test AI agents we built?",
+      "a": "Yes. The Brown Belt tier covers agents and LLM applications you own, or that you are authorized to have tested."
+    },
+    {
+      "q": "How is payment handled?",
+      "a": "A deposit is invoiced through Stripe. The balance is invoiced when the report is delivered."
+    }
+  ]
+}
