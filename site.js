@@ -23,6 +23,7 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     var ok = true;
+    var firstBad = null;
     fields.forEach(function (pair) {
       var input = form.elements[pair[0]];
       var value = (input && input.value || "").trim();
@@ -30,18 +31,25 @@
       if (pair[0] === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) bad = true;
       input.setAttribute("aria-invalid", bad ? "true" : "false");
       show("err-" + pair[0], bad ? pair[1] : "");
-      if (bad) ok = false;
+      if (bad) {
+        ok = false;
+        if (!firstBad) firstBad = input;
+      }
     });
     var box = form.elements.authorized;
     var boxBad = !box.checked;
     box.setAttribute("aria-invalid", boxBad ? "true" : "false");
     show("err-authorized", boxBad ? "Confirm you are authorized to request this test." : "");
-    if (boxBad) ok = false;
+    if (boxBad) {
+      ok = false;
+      if (!firstBad) firstBad = box;
+    }
     var summary = document.getElementById("form-errors");
     summary.hidden = ok;
     summary.textContent = ok ? "" : "Fix the marked fields before sending.";
     if (!ok) {
-      summary.focus();
+      if (firstBad && firstBad.focus) firstBad.focus();
+      else summary.focus();
       return;
     }
     var lines = [
