@@ -45,6 +45,7 @@ HEADER = """<!-- site-header -->
     <a class="brand" href="/">Black Belt Hacker</a>
     <nav aria-label="Site">
       <a href="/products/">Products</a>
+      <a href="/#training">Training</a>
       <a href="/services/">Services</a>
       <a href="/blog/">Blog</a>
       <a href="/about/">About</a>

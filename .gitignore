@@ -1,3 +1,5 @@
 *.bak-*
 *.sync-conflict-*
 .stfolder
+__pycache__/
+*.pyc

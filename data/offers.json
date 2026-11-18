@@ -1,8 +1,8 @@
 {
-  "_readme": "PLACEHOLDER. Paste the real Cal.com URL over CAL_BJJ_URL. Prices below are display only.",
+  "_readme": "Prices and booking URLs David approved. Pentest tiers stay quote after scoping. No Stripe URL.",
   "placeholders": {
     "CAL_PENTEST_URL": "https://cal.com/blackbelthacker/pentest-scoping",
-    "CAL_BJJ_URL": "https://cal.com/REPLACE/bjj-private"
+    "CAL_BJJ_URL": "https://cal.com/blackbelthacker/bjj-private-lesson"
   },
   "support_email": "n0auth@blackbelthacker.com",
   "og_default": "/images/og-default.webp",
@@ -11,11 +11,11 @@
       "id": "kit",
       "kind": "product",
       "name": "Agent Hardening Kit",
-      "tagline": "The security checklist for self hosted AI agents. 76 checks, mapped to OWASP 2026, with a command for every one.",
+      "tagline": "76 checks for a self hosted agent stack. Each check has a command. $19 as a Gumroad download.",
       "price_label": "$19",
       "price_usd": 19,
-      "bullets": ["76 checks", "Mapped to OWASP 2026", "A command for every check"],
-      "cta_label": "Get it on Gumroad",
+      "bullets": ["76 checks", "Mapped to the Open Worldwide Application Security Project (OWASP) 2026", "A command for every check"],
+      "cta_label": "Buy the Agent Hardening Kit",
       "cta_url": "https://blackbelthacker.gumroad.com/l/qizknf",
       "status": "live",
       "image": "/products/kit-cover.webp",
@@ -27,11 +27,11 @@
       "id": "sentinel",
       "kind": "product",
       "name": "Black Belt Sentinel",
-      "tagline": "A read only AI security auditor for your agent stack. 76 checks, free SIEM, IDS, honeytokens and threat intel, coached belt by belt.",
+      "tagline": "A read only auditor for your agent stack. It runs the 76 checks and coaches the fixes. Includes the kit.",
       "price_label": "$29",
       "price_usd": 29,
-      "bullets": ["76 checks on a stack you run", "Free SIEM, IDS, honeytokens, and threat intel", "Coached from white belt to black belt"],
-      "cta_label": "Get it on Gumroad",
+      "bullets": ["76 checks on a stack you run", "Security information and event management (SIEM), an intrusion detection system (IDS), honeytokens, and threat intel", "Coached from white belt to black belt"],
+      "cta_label": "Buy Black Belt Sentinel",
       "cta_url": "https://blackbelthacker.gumroad.com/l/aqnvrn",
       "status": "early_access",
       "includes_kit": true,
@@ -59,11 +59,12 @@
     {
       "id": "bjj",
       "kind": "service",
-      "name": "BJJ Private Lessons",
-      "tagline": "American Top Team Atlanta",
-      "price_label": "",
-      "bullets": ["Private lessons", "American Top Team Atlanta"],
-      "cta_label": "Book a lesson",
+      "name": "Private BJJ lessons",
+      "tagline": "Private lessons at American Top Team Atlanta.",
+      "price_label": "$100 per hour",
+      "price_usd": 100,
+      "bullets": ["Brazilian jiu jitsu (BJJ)", "American Top Team Atlanta"],
+      "cta_label": "Book a private lesson",
       "cta_url": "CAL_BJJ_URL",
       "status": "live",
       "image": ""
@@ -71,13 +72,14 @@
     {
       "id": "course",
       "kind": "service",
-      "name": "Belt Path Security Course",
-      "tagline": "A belt path for defender first security. Not open yet.",
-      "price_label": "",
-      "bullets": ["Waitlist only", "No seat is for sale yet"],
-      "cta_label": "Join the waitlist",
-      "cta_url": "mailto:n0auth@blackbelthacker.com?subject=Course%20waitlist",
-      "status": "coming_soon",
+      "name": "Belt tier security courses",
+      "tagline": "Five belts, from first checks to a stack you can run.",
+      "price_label": "$59",
+      "price_usd": 59,
+      "bullets": ["Separate from penetration test tiers", "Email to enroll"],
+      "cta_label": "Email to enroll",
+      "cta_url": "mailto:n0auth@blackbelthacker.com?subject=Belt%20tier%20course",
+      "status": "live",
       "image": ""
     }
   ],
@@ -90,11 +92,11 @@
     "image_height": 1080
   },
   "services_hero": {
-    "line": "Services for defenders, and private BJJ lessons.",
-    "sub": "Book a scoping call, book a lesson, or join the course waitlist."
+    "line": "Penetration testing and private lessons.",
+    "sub": "Book a scoping call, or book a lesson at American Top Team Atlanta."
   },
   "comparison": {
-    "caption": "Which one do I need?",
+    "caption": "Kit or Sentinel",
     "columns": ["Agent Hardening Kit", "Black Belt Sentinel"],
     "rows": [
       {
@@ -107,6 +109,18 @@
       {
         "label": "Includes the Kit",
         "cells": ["This is the kit", "Includes the Kit"]
+      },
+      {
+        "label": "Price",
+        "cells": ["$19", "$29 early access"]
+      },
+      {
+        "label": "Who runs the checks",
+        "cells": ["You run the commands", "Sentinel runs the checks"]
+      },
+      {
+        "label": "Refund",
+        "cells": ["14 days, no questions asked", "14 days, no questions asked"]
       }
     ]
   },
@@ -160,7 +174,7 @@
       "belt": "Purple Belt",
       "name": "Web Application and API Penetration Test",
       "best_for": "Teams shipping a web app or an API.",
-      "what_i_test": "The application and its API, mapped to OWASP WSTG and the OWASP API Top 10.",
+      "what_i_test": "The application and its API, mapped to the Open Worldwide Application Security Project (OWASP) Web Security Testing Guide and the OWASP API Top 10.",
       "duration": "One to two weeks",
       "price_label": "Quote after scoping",
       "image": "/images/services/web-app.webp",
@@ -193,8 +207,8 @@
     }
   ],
   "pentest_hero": {
-    "line": "Penetration testing from an OSCP who has spent 20 years on the defending side.",
-    "sub": "I test like an attacker and report like a defender: findings your team can fix, ranked by real risk.",
+    "line": "Penetration testing from the defending side.",
+    "sub": "I test like an attacker and report like a defender. Findings your team can fix, ranked by real risk.",
     "image": "/images/services/pentest-hero.webp",
     "image_alt": "A martial artist in a black gi, seen from behind, working at a desk in a dark server aisle.",
     "image_width": 1920,
@@ -202,7 +216,7 @@
   },
   "steps": [
     "Scoping call",
-    "Mutual NDA",
+    "Mutual non disclosure agreement (NDA)",
     "Scope and Rules of Engagement signed",
     "Statement of Work and deposit",
     "Testing in agreed windows",
@@ -212,7 +226,7 @@
   "deliverables": [
     "Executive summary",
     "Technical findings with evidence and reproduction steps",
-    "CVSS v4.0 scores",
+    "Common Vulnerability Scoring System (CVSS) v4.0 scores",
     "Prioritised fix list",
     "Readout call",
     "Retest letter"
